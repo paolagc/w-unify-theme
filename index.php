@@ -12,12 +12,11 @@
 
 			<?php $width = 12;
 				if( is_active_sidebar( 'left' ) ) $width -=3;
-				if( is_active_sidebar( 'right' ) ) $width -=3;
 			 ?>
 			<div class="row">
-					<?php if ( is_active_sidebar( 'left' ) ) : ?>
-						<aside id="left" class="widget-area" role="complementary">
-								<?php dynamic_sidebar( 'left' ); ?>
+					<?php if ( is_active_sidebar( 'sidebar' ) ) : ?>
+						<aside id="sidebar" class="widget-area" role="complementary">
+								<?php dynamic_sidebar( 'sidebar' ); ?>
 						</aside><!-- #left sidebar region -->
 					<?php endif; ?>	
 
@@ -45,12 +44,6 @@
 							<?php endwhile; ?>
 						<?php endif; // end have_posts() check ?>
 					</section>
-
-					<?php if ( is_active_sidebar( 'right' ) ) : ?>
-						<aside id="right" class="widget-area" role="complementary">
-								<?php dynamic_sidebar( 'right' ); ?>
-						</aside><!-- #right sidebar region -->
-					<?php endif; ?>	
 			</div>
 
 			<?php if ( is_active_sidebar( 'after' ) ) : ?>

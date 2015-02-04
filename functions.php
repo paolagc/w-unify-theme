@@ -44,23 +44,13 @@ function theme_base_widgets_init(){
 	* Sidebar widgets
 	*/
 	register_sidebar(array(
-		'name' => 'Right Sidebar',
-		'id'   => 'right',
+		'name' => 'idebar',
+		'id'   => 'sidebar',
 		'description'   => 'These are widgets for right sidebar.',
 		'before_widget' => '<div class="widget block %2$s">',
 		'after_widget'  => '</div>',
 		'before_title'  => '<h5',
 		'after_title'   => '</h5>'
-	));	
-
-	register_sidebar(array(
-			'name' => 'Left Sidebar',
-			'id'   => 'left',
-			'description'   => 'These are widgets for left sidebar.',
-			'before_widget' => '<div class="widget block %2$s">',
-			'after_widget'  => '</div>',
-			'before_title'  => '<h5',
-			'after_title'   => '</h5>'
 	));	
 
 	/*
