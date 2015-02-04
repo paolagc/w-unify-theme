@@ -1,31 +1,27 @@
 
 <?php get_header(); ?>
 <div id="wrapper">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-9">
-
-				<?php if ( is_active_sidebar( 'before' ) ) : ?>
-					<div id="before" class="primary-sidebar widget-area" role="complementary">
+	<div id="content">
+		<div class="container">
+			<?php if ( is_active_sidebar( 'before' ) ) : ?>
+				<div id="before" class="widget-area row" role="complementary">
 						<?php dynamic_sidebar( 'before' ); ?>
-					</div><!-- #before content region -->
-				<?php endif; ?>
+				</div><!-- #before content region -->
+			<?php endif; ?>		
 
-				<?php if(is_front_page()): ?>
-					<div class="row">
-						<?php if ( is_active_sidebar( 'before' ) ) : ?>
-							<div id="home1" class="primary-sidebar widget-area col-md-6">
-								<?php dynamic_sidebar( 'home_1' ); ?>
-							</div><!-- #home1 content region -->
-						<?php endif; ?>
-						<?php if ( is_active_sidebar( 'before' ) ) : ?>
-							<div id="home2" class="primary-sidebar widget-area col-md-6">
-								<?php dynamic_sidebar( 'home_2' ); ?>
-							</div><!-- #home2 content region -->
-						<?php endif; ?>
-					</div>
-				<?php else: ?>
-					<div id="main-content">
+
+			<?php $width = 12;
+				if( is_active_sidebar( 'left' ) ) $width -=3;
+				if( is_active_sidebar( 'right' ) ) $width -=3;
+			 ?>
+			<div class="row">
+					<?php if ( is_active_sidebar( 'left' ) ) : ?>
+						<aside id="left" class="widget-area" role="complementary">
+								<?php dynamic_sidebar( 'left' ); ?>
+						</aside><!-- #left sidebar region -->
+					<?php endif; ?>	
+
+					<section id="main-content" class="col-md-<?php print $width; ?>" role="main">
 						<?php if ( have_posts() ) : ?>
 							<?php while ( have_posts() ) : the_post(); ?>
 								<article id="post-<?php the_ID(); ?>" class="row block margin-bottom-20">
@@ -48,21 +44,20 @@
 								</article><!-- #post-theID-->
 							<?php endwhile; ?>
 						<?php endif; // end have_posts() check ?>
-					</div>
-				<?php endif; ?>	
+					</section>
 
-				<?php if ( is_active_sidebar( 'after' ) ) : ?>
-					<div id="after" class="primary-sidebar widget-area" role="complementary">
-						<?php dynamic_sidebar( 'after' ); ?>
-					</div><!-- #after content region -->
-				<?php endif; ?>
-				
+					<?php if ( is_active_sidebar( 'right' ) ) : ?>
+						<aside id="right" class="widget-area" role="complementary">
+								<?php dynamic_sidebar( 'right' ); ?>
+						</aside><!-- #right sidebar region -->
+					<?php endif; ?>	
 			</div>
-			<?php if ( is_active_sidebar( 'sidebar' ) ) : ?>
-					<aside id="sidebar" class="primary-sidebar widget-area" role="complementary">
-						<?php dynamic_sidebar( 'sidebar' ); ?>
-					</div><!-- sidebar -->
-			<?php endif; ?>
+
+			<?php if ( is_active_sidebar( 'after' ) ) : ?>
+				<div id="before" class="widget-area row" role="complementary">
+						<?php dynamic_sidebar( 'after' ); ?>
+				</div><!-- #after content region -->
+			<?php endif; ?>	
 		</div>
 	</div>
 </div>

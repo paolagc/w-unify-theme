@@ -9,34 +9,16 @@
 				<footer class="footer">
 					<div class="footer-inner">
 						<div class="container">
-							<div class="row">
-								<div class="col-lg-3 col-md-3 col-sm-6">
-									<?php dynamic_sidebar('footer-1'); ?>
-								</div>
-								<div class="col-lg-3 col-md-3 col-sm-6">
-									<?php dynamic_sidebar('footer-2'); ?>
-								</div>
-								<div class="col-lg-3 col-md-3 col-sm-6">
-									<?php dynamic_sidebar('footer-3'); ?>
-								</div>
-								<div class="col-lg-3 col-md-3 col-sm-6">
-									<?php dynamic_sidebar('footer-4'); ?>
-								</div>
-							</div>
+							<?php if ( is_active_sidebar( 'footer' ) ) : ?>
+								<div id="before" class="widget-area row">
+										<?php dynamic_sidebar( 'footer' ); ?>
+								</div><!-- #after content region -->
+							<?php endif; ?>	
 						</div>
 					</div>
 					<div class="copyright">
 						<div class="container">
-							<div class="row">
-								<div class="col-lg-6">
-
-								</div>
-								<div class="col-lg-6">
-									<ul class="list-unstyled list-inline social-network">
-
-									</ul>
-								</div>
-							</div>
+							<?php wp_nav_menu( array( 'menu' => 'footer' , 'menu_class' => 'nav navbar-nav pull-right' )); ?>
 						</div>
 					</div>
 				</footer>
