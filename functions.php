@@ -163,10 +163,9 @@ function slider_help_text($contextual_help, $screen_id, $screen) {
 	}
 	return $contextual_help;
 }
-
 //add custom fields
-add_filter( 'cmb_meta_boxes' , 'theme_base_create_metaboxes' );
-function theme_base_create_metaboxes( $meta_boxes ) {
+add_filter( 'cmb_meta_boxes' , 'slider_create_metaboxes' );
+function slider_create_metaboxes( $meta_boxes ) {
 	$prefix = 'slider_';
 	//PROMOTION SLIDER
 	  $meta_boxes[] = array(
@@ -202,6 +201,128 @@ function theme_base_create_metaboxes( $meta_boxes ) {
 		  'type' => 'text_url',
 		  'protocols' => array( 'http', 'https'),
 	  ),
+	),
+	);
+	return $meta_boxes;
+}
+
+
+// Portfolio
+function showcase_init() {
+    $labels = array(
+        'name' => _x('Showcases', 'post type general name'),
+        'singular_name' => _x('Showcase', 'post type singular name'),
+        'add_new' => _x('Add New', 'Showcase'), //This is our post_type, we'll display the metaboxes only on this post_type!
+        'add_new_item' => __('Add New Showcase'),
+        'edit_item' => __('Edit Showcase'),
+        'new_item' => __('New Showcase'),
+        'view_item' => __('View Showcase'),
+        'search_items' => __('Search Showcases'),
+        'not_found' => __('No Showcases found'),
+        'not_found_in_trash' => __('No Showcases found in Trash'),
+        'parent_item_colon' => '',
+        'menu_name' => 'Showcases'
+    );
+    $args = array(
+        'labels' => $labels,
+        'public' => true,
+        'publicly_queryable' => true,
+        'show_ui' => true,
+        'show_in_menu' => true,
+        'menu_position' => 5,
+        'query_var' => true,
+        'rewrite' => true,
+        'capability_type' => 'post',
+        'has_archive' => true,
+        'hierarchical' => false,
+        'supports' => array('title', 'thumbnail')
+    );
+    register_post_type('theme_base_showcase', $args);
+}
+add_action( 'init', 'showcase_init' );
+
+// Texonomy to classify the project by features
+function create_feature_taxonomies() {
+	$labels = array(
+		'name'              => _x( 'features', 'taxonomy general name' ),
+		'singular_name'     => _x( 'feature', 'taxonomy singular name' ),
+		'search_items'      => __( 'Search features' ),
+		'all_items'         => __( 'All features' ),
+		'parent_item'       => __( 'Parent feature' ),
+		'parent_item_colon' => __( 'Parent feature:' ),
+		'edit_item'         => __( 'Edit Feature' ),
+		'update_item'       => __( 'Update feature' ),
+		'add_new_item'      => __( 'Add New feature' ),
+		'new_item_name'     => __( 'New feature Name' ),
+		'menu_name'         => __( 'Features' ),
+	);
+
+	$args = array(
+		'hierarchical'      => true,
+		'labels'            => $labels,
+		'show_ui'           => true,
+		'show_admin_column' => true,
+		'query_var'         => true,
+		'rewrite'           => array( 'slug' => 'feature' ),
+	);
+	register_taxonomy( 'features', 'theme_base_showcase', $args );
+}	
+
+add_filter( 'cmb_meta_boxes' , 'showcase_create_metaboxes' );
+function showcase_create_metaboxes( $meta_boxes ) {	
+	$prefix = 'showcase_';
+	//showcase
+	  $meta_boxes[] = array(
+		'id' => 'theme_base_showcase_contents',
+		'title' => 'Showcase',
+		'pages' => array('theme_base_showcase'),//Add our post_type() we created earlier.
+		'context' => 'normal',
+		'priority' => 'low',
+		'show_names' => true,
+		'fields' => array(
+			array(
+			'name' => 'Instructions',
+			'desc' => "<ol><li>Enter your title above.</li><li>In the right column upload a featured image (Make sure this image is at least <b>400px,300px</b>).</li><li>Then if you'd like to add a few words about your feature do so below. (I would suggest no more than 100 words!).</li><li>Finaly position the body text; Then publish the slide.</li></ol>",
+			'type' => 'title',
+		  ),
+		  array(
+			    'name' => 'Company Name',
+			    'id' => $prefix . 'company',
+			    'type' => 'text'
+			),
+		  array(	//Add a text area
+			'name' => 'Description',
+			'desc' => 'Enter a few words about the proyect',
+			'id' =>  $prefix . 'caption',
+			'type' => 'textarea_small'
+		  ),
+		  array(	//Features
+			'name' => 'Features',
+			'desc' => 'Main features',
+			'id' =>  $prefix . 'features',
+			'taxonomy' => 'features', //Enter Taxonomy Slug
+    		'type' => 'taxonomy_multicheck_inline',    
+		  ),
+		  array(	//Date
+			'name' => 'Date',
+			'desc' => 'Date of the project',
+			'id' =>  $prefix . 'date',
+			'type' => 'text_date'
+		  ),
+		  array(	//Add Image
+			'name' => 'Image',
+			  'desc' => 'Upload an image or enter an URL.',
+			  'id' => $prefix . 'image',
+			  'type' => 'file',
+			  'allow' => array( 'url', 'attachment' )
+		  ),
+		  array(	//Add URL link
+			'name' => 'Link',
+			  'desc' => 'Link to the project',
+			  'id' => $prefix . 'url',
+			  'type' => 'text_url',
+			  'protocols' => array( 'http', 'https'),
+		  ),
 	),
 	);
 	return $meta_boxes;
