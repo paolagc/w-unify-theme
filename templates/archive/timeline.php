@@ -1,7 +1,7 @@
 
 <?php
 	/*
-	Template Name: Blog Inverse
+	Template Name: Timeline page
 	*/
 
  	get_header(); ?>
@@ -26,44 +26,40 @@
 					<?php endif; ?>	
 
 					<section id="main-content" class="col-md-<?php print $width; ?>" role="main">
-						<div class="one-page">
+						<ul class="timeline-v1">
 							<?php if ( have_posts() ) :
 								$cont = 0;
 								while ( have_posts() ) : the_post(); 
-								$thumbnail = get_the_post_thumbnail( $post->ID, array(550 , 350) ); 
-								$content = '<h2 class="archive-title"><a href="'.the_permalink().'" rel="bookmark" title="'.the_title_attribute();.'">'.the_title();.'/a></h2>';
-								$content .= substr( get_the_content(), 0, 400); 
-								$content .= '<a href="'.the_permalink().'" class="pull-right button read-more">Leer mas >></a>';
-
+								$thumbnail = get_the_post_thumbnail( $post->ID, array(550 , 350) );
 							?>
-									<div id="post-<?php the_ID(); ?>" class="one-page-inner">
-										<div class="container content">
-											<div class="row">
-												<div class="col-md-6">
+									<li class="<?php if($cont%2 === 1) print 'timeline-inverted' ?>" >
+										<div class="timeline-badge primary"><i class="glyphicon glyphicon-record"></i></div>
+										<div class="timeline-panel">
+											<div class="timeline-heading">
+												<?php print $thumbnail; ?>
+											</div>
+											<div class="timeline-body text-justify">
+												<h2 class="archive-title"><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></h2>
+												<p>
 													<?php 
-													if($cont % 2 === 0){
-														print $content;
-													}
-													else{
-														print $thumbnail;	
-													} ?>
-												</div>
-												<div class="col-md-6">
-													<?php 
-													if($cont % 2 === 1){
-														print $thumbnail;
-													}
-													else{
-														print $content;	
-													} ?>
+														$content = get_the_content(); 
+														echo substr( $content, 0, 400);
+													?>
+												</p>
+												<a href="<?php the_permalink() ?>" class="pull-right button read-more btn-u btn-u-sm">Leer mas >></a>
+												<div class="timeline-footer">
+													<ul class="list-unstyled list-inline blog-info">
+														<li><i class="fa fa-clock-o"></i><?php the_date('Y-m-d', '<h3>', '</h3>'); ?></li>
+														<li><i class="fa fa-user"></i><?php the_author(); ?></li>
+													</ul>
 												</div>
 											</div>
 										</div>
-									</div>
+									</li>
 								<?php $cont++; ?>
 								<?php endwhile; 
 								endif; // end have_posts() check ?>
-						</div>
+						</ul>
 					</section>
 			</div>
 
