@@ -39,7 +39,7 @@
 												<?php print $thumbnail; ?>
 											</div>
 											<div class="timeline-body text-justify">
-												<h2 class="archive-title"><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></h2>
+												<h3 class="archive-title"><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></h3>
 												<p>
 													<?php 
 														$content = get_the_content(); 
@@ -49,7 +49,7 @@
 												<a href="<?php the_permalink() ?>" class="pull-right button read-more btn-u btn-u-sm">Leer mas >></a>
 												<div class="timeline-footer">
 													<ul class="list-unstyled list-inline blog-info">
-														<li><i class="fa fa-clock-o"></i><?php the_date('Y-m-d', '<h3>', '</h3>'); ?></li>
+														<li><i class="fa fa-clock-o"></i><?php the_date('Y-m-d', , ); ?></li>
 														<li><i class="fa fa-user"></i><?php the_author(); ?></li>
 													</ul>
 												</div>
