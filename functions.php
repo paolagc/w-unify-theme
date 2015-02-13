@@ -7,6 +7,9 @@
 function theme_name_scripts() {
 	wp_enqueue_style( 'styles.css', get_stylesheet_uri() );
 
+	wp_enqueue_style( 'header', get_template_directory_uri() . '/css/header.css' );
+	wp_enqueue_style( 'footer', get_template_directory_uri() . '/css/footer.css' );
+
 	wp_enqueue_style( 'bootstrap', get_template_directory_uri() . '/css/bootstrap.min.css' );
 	wp_enqueue_style( 'font-awesome', get_template_directory_uri() . '/css/font-awesome.css' );
 
@@ -106,6 +109,68 @@ function add_isotope() {
  
 add_action( 'wp_enqueue_scripts', 'add_isotope' );
 
+// Custom user fields
+add_action( 'edit_user_profile', 'extra_profile_fields' );
+function extra_profile_fields( $user ){
+	$prefix = 'user_';
+	$meta_boxes['user_edit'] = array(
+		'id'         => 'user_edit',
+		'title'      => 'About Me',
+		'pages'      => array( 'user' ), 
+		'show_names' => true,
+		'fields'     => array(
+			array(
+				'name' => 'Image',
+				'id'   => $prefix . 'facebookurl',
+				'description' => 'Upload an image or enter the URL',
+				'type' => 'file',
+    			'allow' => array( 'url', 'attachment' ) 
+			),
+			array(
+				'name' => 'About me',
+				'id'   => $prefix . 'description',
+				'description' => 'Tell us about you',
+				'type' => 'textarea',
+			),
+		)
+	);
+	return $meta_boxes;
+}
+
+add_action( 'edit_user_profile', 'social_profile_fields' );
+function social_profile_fields( $user ){
+	$prefix = 'user_';
+	$meta_boxes[] = array(
+		'id'         => 'user_edit',
+		'title'      => 'Social Networks',
+		'pages'      => array( 'user' ), 
+		'show_names' => true,
+		'fields'     => array(
+			array(
+				'name' => 'Facebook URL',
+				'id'   => $prefix . 'facebookurl',
+				'type' => 'text_url',
+			),
+			array(
+				'name' => 'Twitter URL',
+				'id'   => $prefix . 'twitterurl',
+				'type' => 'text_url',
+			),
+			array(
+				'name' => 'Google+ URL',
+				'id'   => $prefix . 'googleplusurl',
+				'type' => 'text_url',
+			),
+			array(
+				'name' => 'Linkedin URL',
+				'id'   => $prefix . 'linkedinurl',
+				'type' => 'text_url',
+			),
+		)
+	);
+	return $meta_boxes;
+}
+
 // Custom post types
 
 if ( function_exists( 'add_theme_support' ) ) { 
@@ -142,7 +207,7 @@ function slider_init() {
         'hierarchical' => false,
         'supports' => array('title', 'thumbnail')
     );
-    register_post_type('theme_base_slider', $args);
+    register_post_type('slider', $args);
 }
 add_action( 'init', 'slider_init' );
 
@@ -169,9 +234,9 @@ function slider_create_metaboxes( $meta_boxes ) {
 	$prefix = 'slider_';
 	//PROMOTION SLIDER
 	  $meta_boxes[] = array(
-		'id' => 'theme_base_slider_contents',
+		'id' => 'slider_contents',
 		'title' => 'Featured Slider',
-		'pages' => array('theme_base_slider'),//Add our post_type() we created earlier.
+		'pages' => array('slider'),//Add our post_type() we created earlier.
 		'context' => 'normal',
 		'priority' => 'low',
 		'show_names' => true,
@@ -237,24 +302,24 @@ function showcase_init() {
         'hierarchical' => false,
         'supports' => array('title', 'thumbnail')
     );
-    register_post_type('theme_base_showcase', $args);
+    register_post_type('showcase', $args);
 }
 add_action( 'init', 'showcase_init' );
 
 // Texonomy to classify the project by features
 function create_feature_taxonomies() {
 	$labels = array(
-		'name'              => _x( 'features', 'taxonomy general name' ),
-		'singular_name'     => _x( 'feature', 'taxonomy singular name' ),
-		'search_items'      => __( 'Search features' ),
-		'all_items'         => __( 'All features' ),
-		'parent_item'       => __( 'Parent feature' ),
-		'parent_item_colon' => __( 'Parent feature:' ),
-		'edit_item'         => __( 'Edit Feature' ),
-		'update_item'       => __( 'Update feature' ),
-		'add_new_item'      => __( 'Add New feature' ),
-		'new_item_name'     => __( 'New feature Name' ),
-		'menu_name'         => __( 'Features' ),
+		'name'              => _x( 'Features', 'taxonomy general name' ),
+		'singular_name'     => _x( 'Feature', 'taxonomy singular name' ),
+		'search_items'      => __('Search features' ),
+		'all_items'         => __('All features' ),
+		'parent_item'       => __('Parent feature' ),
+		'parent_item_colon' => __('Parent feature:' ),
+		'edit_item'         => __('Edit Feature' ),
+		'update_item'       => __('Update feature' ),
+		'add_new_item'      => __('Add New feature' ),
+		'new_item_name'     => __('New feature Name' ),
+		'menu_name'         => __('Features' ),
 	);
 
 	$args = array(
@@ -265,7 +330,7 @@ function create_feature_taxonomies() {
 		'query_var'         => true,
 		'rewrite'           => array( 'slug' => 'feature' ),
 	);
-	register_taxonomy( 'features', 'theme_base_showcase', $args );
+	register_taxonomy( 'features', 'showcase', $args );
 }	
 
 add_filter( 'cmb_meta_boxes' , 'showcase_create_metaboxes' );
@@ -273,9 +338,9 @@ function showcase_create_metaboxes( $meta_boxes ) {
 	$prefix = 'showcase_';
 	//showcase
 	  $meta_boxes[] = array(
-		'id' => 'theme_base_showcase_contents',
+		'id' => 'showcase_contents',
 		'title' => 'Showcase',
-		'pages' => array('theme_base_showcase'),//Add our post_type() we created earlier.
+		'pages' => array('showcase'),//Add our post_type() we created earlier.
 		'context' => 'normal',
 		'priority' => 'low',
 		'show_names' => true,

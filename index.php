@@ -51,9 +51,9 @@
 						<?php dynamic_sidebar( 'after' ); ?>
 				</div><!-- #after content region -->
 			<?php endif; ?>	
-		</div>
-	</div>
-</div>
+		</div><!-- end container-->
+	</div><!-- end content -->
+</div><!-- end wrapper -->
 <?php get_footer(); ?>
 
 	

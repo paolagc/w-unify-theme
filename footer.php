@@ -25,7 +25,7 @@
 			<!-- End footer -->
 		</div>
 		<!-- Back to top -->
-		<a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
+		<a href="#" class="topcontrol"><i class="fa fa-angle-up active"></i></a>
 		<!-- wp footer -->
 		<?php wp_footer(); ?>
 	</body>
