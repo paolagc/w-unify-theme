@@ -155,6 +155,17 @@ function add_isotope() {
  
 add_action( 'wp_enqueue_scripts', 'add_isotope' );
 
+function setup_theme_admin_menus() {
+     add_submenu_page('themes.php', 
+        'Social Networks', 'Social Networks Configuration', 'manage_options', 
+        'social-networks-config', 'social_settings'); 
+}
+add_action('admin_menu', 'setup_theme_admin_menus');
+
+function social_settings(){
+	
+}
+
 // Custom user fields
 add_action( 'edit_user_profile', 'extra_profile_fields' );
 function extra_profile_fields( $user ){

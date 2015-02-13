@@ -81,7 +81,7 @@
 					      		<h3 class="carousel-title"><?php print $item['title']?></h3>
 					        	<p><?php print $item['caption']?></p>
 					        	<div class="more-link">
-					        		<?php print dm_format_link($item['url'])?>
+					        		<?php print theme_base_format_link($item['url'])?>
 					        	</div>
 					      </div>
 					    </div>
