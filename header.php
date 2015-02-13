@@ -40,9 +40,10 @@
 	    </div>
 
 	    <?php if(!is_front_page()) : ?>
-		    <div class="breadcrumb">
+		    <div class="breadcrumbs">
 		    	<div class="container">
-
+		    		<h1 class="pull-left"><?php the_title() ?></h1>
+		    		<?php print the_breadcrumb(); ?>
 		    	</div>
 		    </div>
 		<?php endif; ?>
