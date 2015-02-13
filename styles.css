@@ -12,6 +12,173 @@ body {
 	line-height: 1.6;
 }
 
+* {
+   border-radius: 0 !important;
+}
+
+a,
+a:focus, 
+a:hover, 
+a:active,
+button,
+button:hover {
+   outline: 0 !important;
+}
+
+a:focus {
+  text-decoration: none;
+}
+
+p, 
+li,
+li a { 
+   color: #555;
+}
+
+a {
+   color: #72c02c;
+   text-decoration: none;  
+}
+
+a,
+a:focus, 
+a:hover, 
+a:active {
+   outline: 0 !important;
+}
+a:focus {
+  text-decoration: none;
+}
+a:hover {
+   color: #72c02c;
+   text-decoration: underline;
+}
+
+.overflow-hidden {
+	overflow: hidden;
+}
+
+/*Boxed Layout
+------------------------------------*/
+.wrapper {
+  background: #fff;
+}
+
+.boxed-layout {
+  padding: 0;
+  box-shadow: 0 0 5px #ccc;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+hr {
+  margin: 30px 0;
+}
+
+hr.hr-md {
+  margin: 20px 0;
+}
+
+/*Headings*/
+h1 {
+  font-size: 28px;
+  line-height: 35px;
+}
+h2 {
+  font-size: 24px;
+  line-height: 33px;
+}
+h3 {
+  font-size: 20px;
+  line-height: 27px;
+}
+h4 {
+  line-height: 25px;
+}
+h5 {
+  line-height: 20px;
+}
+h6 {
+  line-height: 18px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #585f69;    
+  margin-top: 5px;
+  text-shadow: none; 
+  font-weight: normal; 
+  font-family: 'Open Sans', sans-serif;
+} 
+
+h1 i, h2 i, h3 i, h4 i, h5 i, h6 i {
+   margin-right: 5px;
+}
+
+/*Block Headline*/
+.headline {
+  display: block;
+  margin: 10px 0 25px 0;
+  border-bottom: 1px dotted #e4e9f0;
+}
+
+.headline h2 {
+  font-size: 22px;
+}
+
+.headline h2, 
+.headline h3, 
+.headline h4 {
+  margin: 0 0 -2px 0;
+  padding-bottom: 5px;
+  display: inline-block;
+  border-bottom: 2px solid #72c02c;
+}
+
+.headline-md {
+  margin-bottom: 15px;
+}
+
+.headline-md h2 {
+  font-size: 21px;
+}
+
+/*Heading Options*/
+.heading {
+  text-align: center;
+}
+
+.heading h2 {
+  padding: 0 12px;
+  position: relative;
+  display: inline-block;
+  line-height: 34px !important; /*For Tagline Boxes*/
+}
+
+.heading h2:before, 
+.heading h2:after {
+  content: ' ';
+  width: 70%;  
+  position: absolute;
+  border-width: 1px;
+  border-color: #bbb;
+}
+
+.heading h2:before {
+  right: 100%;
+}
+
+.heading h2:after {
+  left: 100%;
+}
+
+@media (max-width: 768px) {
+  .heading h2:before, 
+  .heading h2:after {
+    width: 20%;  
+  }
+}
+
+
 /*plugins*/
 #topcontrol {
   color: #fff;
