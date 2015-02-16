@@ -1,25 +1,10 @@
 
 <?php get_header(); ?>
-<div id="wrapper">
-	<div id="content">
-		<div class="container">
-			<?php if ( is_active_sidebar( 'before' ) ) : ?>
-				<div id="before" class="widget-area row" role="complementary">
-						<?php dynamic_sidebar( 'before' ); ?>
-				</div><!-- #before content region -->
-			<?php endif; ?>		
-
-
 			<?php $width = 12;
-				if( is_active_sidebar( 'left' ) ) $width -=3;
+				if( is_active_sidebar( 'sidebar' ) ) $width -=3;
 			 ?>
 			<div class="row">
-					<?php if ( is_active_sidebar( 'sidebar' ) ) : ?>
-						<aside id="sidebar" class="widget-area" role="complementary">
-								<?php dynamic_sidebar( 'sidebar' ); ?>
-						</aside><!-- #left sidebar region -->
-					<?php endif; ?>	
-
+					<?php get_sidebar(); ?>
 					<section id="main-content" class="col-md-<?php print $width; ?>" role="main">
 						<?php if ( have_posts() ) : ?>
 							<?php while ( have_posts() ) : the_post(); ?>
@@ -45,15 +30,6 @@
 						<?php endif; // end have_posts() check ?>
 					</section>
 			</div>
-
-			<?php if ( is_active_sidebar( 'after' ) ) : ?>
-				<div id="before" class="widget-area row" role="complementary">
-						<?php dynamic_sidebar( 'after' ); ?>
-				</div><!-- #after content region -->
-			<?php endif; ?>	
-		</div><!-- end container-->
-	</div><!-- end content -->
-</div><!-- end wrapper -->
 <?php get_footer(); ?>
 
 	

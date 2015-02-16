@@ -11,10 +11,11 @@
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	</script>
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
 	<?php wp_head(); ?> 
 </head>
-<body>
+<body <?php body_class(); ?>>
 	<header class="header" role="banner">
 		<!-- Start Topbar -->
 		<div class="topbar" role="menu"> 
@@ -27,15 +28,17 @@
 		<div class="navbar navbar-default mega-menu" role="navigation">
 	            <div class="container">
 	            		<div class="navbar-header" role="button">
-	            			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-		                        <span class="sr-only">Toggle navigation</span>
-		                        <span class="fa fa-bars"></span>
-		                    </button>
-	            			<a class="navbar-brand" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>
+		                    <div class="site-branding">
+								<h1 class="site-title"><a class="navbar-brand" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
+							</div><!-- .site-branding -->
 	            		</div>
+
 	            		<div class="collapse navbar-collapse navbar-responsive-collapse">
-	            			<?php wp_nav_menu( array( 'menu' => 'main' , 'menu_class' => 'nav navbar-nav' )); ?>
-	            		</div>
+		            		<nav id="site-navigation" class="main-navigation" role="navigation">
+								<button class="menu-toggle" aria-controls="menu" aria-expanded="false"><span class="fa fa-bars"></span></button>
+								<?php wp_nav_menu( array( 'menu' => 'main' , 'menu_class' => 'nav navbar-nav') ); ?>
+							</nav>
+						</div><!-- #site-navigation -->
 	            </div>
 	    </div>
 
@@ -76,7 +79,7 @@
 				 	$cont = 0;
 				 	foreach ($items as $item): ?>
 				 		<div class="item <?php if($cont === 0)  print active?>">
-					      <img src="<?php print $item['image']?>" alt="<?php print $item['title']?>" width="9999" height="400">
+					      <img src="<?php print $item['image']?>" alt="<?php print $item['title']?>" width="1920" height="300">
 					      <div class="carousel-caption row-fluid"><h3 class="carousel-title">
 					      		<h3 class="carousel-title"><?php print $item['title']?></h3>
 					        	<p><?php print $item['caption']?></p>
@@ -101,3 +104,11 @@
 			</section>
 	<?php endif; ?>
 <?php endif; ?>
+<div id="wrapper">
+	<div id="content">
+		<div class="container">
+			<?php if ( is_active_sidebar( 'before' ) ) : ?>
+				<div id="before" class="widget-area row" role="complementary">
+						<?php dynamic_sidebar( 'before' ); ?>
+				</div><!-- #before content region -->
+			<?php endif; ?>	

@@ -15,7 +15,11 @@ function theme_name_scripts() {
 	wp_enqueue_style( 'bootstrap', get_template_directory_uri() . '/css/bootstrap.min.css' );
 	wp_enqueue_style( 'font-awesome', get_template_directory_uri() . '/css/font-awesome.css' );
 
+	wp_enqueue_script( 'jquery' );
 	wp_enqueue_script( 'bootstrap.min', get_template_directory_uri() . '/js/bootstrap.min.js', array(), '1.0.0', true );
+	wp_enqueue_script( 'app', get_template_directory_uri() . '/js/apps.js');
+	wp_enqueue_script( 'navigation', get_template_directory_uri() . '/js/navigation.js');
+	wp_enqueue_script( 'back-to-top', get_template_directory_uri() . '/js/back-to-top.js');
 }
 
 add_action( 'wp_enqueue_scripts', 'theme_name_scripts' );
@@ -28,17 +32,71 @@ function theme_base_initialize_cmb_meta_boxes() {
         require_once dirname( __FILE__ ) . '/inc/metaboxes/init.php';
 }
 
+function theme_base_setup(){
 
-/*
-* Navigation Menus
-*/
-register_nav_menus(
-	array(
-	'main'=>__('Main Menu'),
-	'user'=>__('User Menu'),
-	'footer'=>__('Footer Menu'),
-	)
-);
+	/*
+	* Navigation Menus
+	*/
+	register_nav_menus(
+		array(
+		'main'=>__('Main Menu'),
+		'user'=>__('User Menu'),
+		'footer'=>__('Footer Menu'),
+		)
+	);
+	/*
+	 * Switch default core markup for search form, comment form, and comments
+	 * to output valid HTML5.
+	 */
+	add_theme_support( 'html5', array(
+		'search-form', 'comment-form', 'comment-list', 'gallery', 'caption',
+	) );
+	/*
+	 * Enable support for Post Formats.
+	 * See http://codex.wordpress.org/Post_Formats
+	 */
+	add_theme_support( 'post-formats', array(
+		'aside', 'image', 'video', 'quote', 'link',
+	) );
+
+
+	if ( function_exists( 'add_theme_support' ) ) { 
+	    add_theme_support( 'post-thumbnails' );
+
+	    add_image_size( 'full-size', 9999, 9999, false ); // Full size screen
+	    add_image_size( 'full-blog', 850, 300, false ); // Full size screen
+	}
+}
+/* Comments*/
+function format_comment($comment, $args, $depth) {
+    
+    $GLOBALS['comment'] = $comment; ?>
+    <li <?php comment_class(); ?> id="comment-<?php comment_ID(); ?>">
+    <a class="pull-left">
+    	<?php echo get_avatar( $comment, 60 ); ?>
+    </a>
+    <div class="media-body">
+    	<h4 class="media-heading">
+    		<?php print get_comment_author_link(); ?>
+    		<span>
+    			 <time <?php comment_time( 'c' ); ?> class="comment-time">
+					 <span class="date">
+					 	<?php comment_date(); ?>
+					 </span>
+					 <span class="time">
+					 	<?php comment_time(); ?>
+					 </span>
+				 </time>
+    			/
+    			<?php comment_reply_link(array_merge( $args, array('depth' => $depth, 'max_depth' => $args['max_depth']))) ?>
+    		</span>
+    	</h4>
+    	 <?php comment_text(); ?>
+    </div>
+    <hr>
+<?php 
+}
+
 
 /*
 * Breadcrumb
@@ -230,10 +288,6 @@ function social_profile_fields( $user ){
 
 // Custom post types
 
-if ( function_exists( 'add_theme_support' ) ) { 
-    add_theme_support( 'post-thumbnails' );
-    add_image_size( 'full-size', 9999, 9999, false ); // Full size screen
-}
 
 function slider_init() {
     $labels = array(
