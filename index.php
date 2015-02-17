@@ -8,24 +8,24 @@
 					<section id="main-content" class="col-md-<?php print $width; ?>" role="main">
 						<?php if ( have_posts() ) : ?>
 							<?php while ( have_posts() ) : the_post(); ?>
-								<article id="post-<?php the_ID(); ?>" class="row block margin-bottom-20">
+								<div class="row blog blog-medium margin-bottom-40">
 									<?php if ( has_post_thumbnail() ) : ?>
-										<div class="col-md-4 col-sm-12">
-											<?php the_post_thumbnail('archive-thumb' , array('class' => 'img-bordered')); ?>
+										<div class="col-md-5">
+											<?php the_post_thumbnail('medium'); ?>
+										</div>
+										<div class="col-md-<?php print ( has_post_thumbnail())? 7 : 12 ?>">
+											<?php the_title( '<h2 class="entry-title">', '</h2>' ); ?>
+											<ul class="list-unstyled list-inline blog-info">
+										        <li><i class="fa fa-calendar"></i> <?php the_date('Y-m-d'); ?></li>
+										        <li><i class="fa fa-pencil"></i> <?php the_author_link(); ?></li>
+										        <li><i class="fa fa-comments"></i> <a href="#"> <?php comments_number( '0 comments', '1 comment', '% comments' ); ?>.</a></li>
+										    </ul>
+										    <?php the_excerpt(); ?> 
+										    <a href="<?php echo get_permalink( ); ?>" class="btn-u btn-u-sm">Read More<i class="fa fa-angle-double-right"></i></a>
 										</div>
 									<?php endif; ?>
-									<div class="col-md-<?php print (has_post_thumbnail() ? 8 : 12)?> col-sm-12">
-										<h2 class="archive-title"><a href="<?php the_permalink() ?>" rel="bookmark" title="Permanent Link to <?php the_title_attribute(); ?>"><?php the_title(); ?></a></h2>
-										<div class="entry">
-											<p class="margin-bottom-20"><?php 
-												$content = get_the_content(); 
-												echo substr( $content, 0, 400);
-											?></p>
-											<a href="<?php the_permalink() ?>" class="pull-right button read-more">Leer mas >></a>
-										</div>
-									</div>
-
-								</article><!-- #post-theID-->
+								</div>
+								<hr>
 							<?php endwhile; ?>
 						<?php endif; // end have_posts() check ?>
 					</section>

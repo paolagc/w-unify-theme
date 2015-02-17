@@ -20,6 +20,10 @@ function theme_name_scripts() {
 	wp_enqueue_script( 'app', get_template_directory_uri() . '/js/apps.js');
 	wp_enqueue_script( 'navigation', get_template_directory_uri() . '/js/navigation.js');
 	wp_enqueue_script( 'back-to-top', get_template_directory_uri() . '/js/back-to-top.js');
+
+	//plugins
+	wp_enqueue_script('jquery.fancybox.js', get_template_directory_uri() . '/js/jquery.fancybox.js', array( 'jquery' ), false, true);
+
 }
 
 add_action( 'wp_enqueue_scripts', 'theme_name_scripts' );
