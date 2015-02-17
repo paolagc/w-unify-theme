@@ -102,6 +102,8 @@ function format_comment($comment, $args, $depth) {
 * Breadcrumb
 */
 function the_breadcrumb() {
+	$pid = $post->ID;
+
 	$breadcrumb = '<ul class="pull-right breadcrumb">';
 	//home
 	$base_url = esc_url( home_url( '/' ) );
@@ -109,22 +111,36 @@ function the_breadcrumb() {
 
 	//Category page
 	if( is_category()){
-		$breadcrumb .= '<li>'.the_category().'</li>';
+		$category = get_the_category($pid);
+		$cat_name = get_cat_name($category[0]->cat_ID);
+		$breadcrumb .= '<li>'.$cat_name.'</li>';
 	}
+
 
 	//Single post page
 	if( is_single()){
-		 // Get the URL of this category
-		 $breadcrumb .= '<li>'.the_category().'</li>';
+		$category = get_the_category($pid);
+		$post = get_post($pid);
+
+		// Get the URL of this category
+		$cat_link = get_category_link($category[0]);
+		$cat_name = get_cat_name($category[0]->cat_ID);
+		$breadcrumb .= '<li><a href="'.$cat_link.'">'.$cat_name.'</a></li>';
 
     	//post title
-    	$breadcrumb .= '<li>'.the_title().'</li>';
+    	$breadcrumb .= '<li>'.$post->post_title.'</li>';
 	}
 
 	// Single page
 	if( is_page() ){
+		$pdata = get_post($pid);
+		//ancestors title
+		while ($pdata->post_parent) {
+			$pdata = get_post($pdata->post_parent);
+			$breadcrumb .= '<a href="'.get_permalink($pdata->ID).'">'.$pdata->post_title.'</a>';
+		}
 		//page title
-    	$breadcrumb .= '<li>'.the_title().'</li>';
+    	$breadcrumb .= '<li>'.$pdata->post_title.'</li>';
 	}
 
 	// Tag page
