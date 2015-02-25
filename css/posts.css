@@ -1,0 +1,159 @@
+/*Blog Page*/
+.blog h2 {
+	color: #555;
+	font-size: 21px;
+	line-height: 32px;
+	margin-bottom: 10px;
+}
+
+.blog h2 a {
+	color: #585f69;
+	line-height: 32px;
+}
+
+.blog h2 a:hover {
+	color: #72c02c;
+	text-decoration: none;
+}
+
+.blog .blog-img { 
+	margin: 20px 0;
+}
+
+.headline-md {
+	margin-top: 9px;
+}
+
+/*Blog Content Tags*/
+.blog-post-tags {
+	padding: 5px 0 8px;
+	margin-bottom: 10px;
+	border-top: solid 1px #eee;
+	border-bottom: solid 1px #eee;
+}
+
+.blog-post-tags ul {
+	margin-bottom: 0;
+}
+
+.blog-post-tags li {
+	font-size: 12px;
+}
+
+.blog-post-tags li i {
+	color: #777;
+}
+
+ul.blog-tags a {
+	font-size: 13px;
+	padding: 2px 7px;
+	background: #f7f7f7;
+	margin: 0 3px 6px 0;
+	display: inline-block;
+}
+
+.blog-post-tags ul.blog-info {
+	color: #eee;
+	margin-bottom: 3px;
+}
+
+.blog-post-tags ul.blog-tags a {
+	color: #555;
+	font-size: 11px;
+	display: inline;
+	padding: 3px 7px;
+	margin-right: 2px;
+	background: #f4f4f4;
+}
+
+.blog-post-tags ul.blog-tags a:hover {
+	background: #72c02c;
+}
+
+/*single blog*/
+------------------------------------*/
+.blog-item .media img {
+	top: 3px;
+	width: 54px;
+	height: 54px;
+	position: relative;
+}
+
+.post-comment h3,
+.blog-item .media h3 {
+	color: #72c02c;
+	font-size: 21px;
+	margin-bottom: 25px;
+}
+
+.blog-item .media h4.media-heading {
+	color: #555;
+	font-size: 17px;
+	position: relative;
+}
+
+.blog-item .media h4.media-heading span {
+	top: 3px; 
+	right: 0;
+	color: #777;
+	font-size: 12px;
+	position: absolute;
+}
+
+.blog-item .media h4.media-heading span a {
+	color: #72c02c;
+}
+
+/*Gallery Page
+------------------------------------*/
+.gallery-page .thumbnail,
+.gallery-page .thumbnail:hover {
+	padding: 0;
+	border: none;
+	box-shadow: none;
+}
+.gallery-page .thumbnails {
+	margin-bottom:6px;
+}
+
+/*magazine news*/
+
+span.magazine-badge {
+	top: 0;
+	left: 0;
+	color: #fff;
+	font-size: 14px;
+	padding: 2px 8px;
+	position: absolute;
+	font-style: inherit;
+}
+
+.magazine-news-img {
+	overflow: hidden;
+	max-height: 150px;
+	position: relative;
+}
+
+/*Magazine Mini News*/
+.magazine-mini-news .post-author {
+	font-size: 11px;
+}
+
+.magazine-mini-news h3,
+.magazine-mini-news h3 a {
+	font-size: 16px;
+	line-height: 22px;
+	margin-bottom: 6px;
+}
+
+.magazine-mini-news .post-author {
+	margin-bottom: 8px;
+}
+
+.magazine-mini-news .post-author span {
+	color: #555;
+}
+
+.magazine-mini-news .post-author strong {
+	color: #72c02c;
+}
