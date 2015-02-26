@@ -62,7 +62,7 @@ wp_reset_query();?>
 				'caption' => get_post_meta($post->ID, 'showcase_caption', true),
 				'company' => get_post_meta($post->ID, 'showcase_features', true), 
 				'caption' => get_post_meta($post->ID, 'showcase_date', true),
-				'company' => get_post_meta($post->ID, 'showcase_image', true),
+				'company' => get_post_meta($post->ID, 'showcase_images', true),
 				'url' => get_post_meta($post->ID, 'showcase_url', true),
 			);
 		endwhile; 

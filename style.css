@@ -1012,6 +1012,17 @@ h1 i, h2 i, h3 i, h4 i, h5 i, h6 i {
    transform: scale(2) rotate(5deg);
 }
 
+/*FancyBox Hover Effect*/
+.zoomer:hover .overlay-zoom .zoom-icon{
+   opacity:0.4;   
+   -webkit-transform: scale(1);
+   -moz-transform: scale(1);
+   -o-transform: scale(1);
+   -ms-transform: scale(1);
+   transform: scale(1);
+   filter: alpha(opacity = 50);
+}
+
 .overlay-zoom {
    z-index: 90;
    width: 100%;
@@ -1050,6 +1061,13 @@ h1 i, h2 i, h3 i, h4 i, h5 i, h6 i {
    -ms-transform: scale(0);
    transform: scale(0);
 }
+
+@media (max-width: 768px) {
+   .fancybox-overlay {
+      background: none !important;
+   }
+}
+
 
 /*plugins*/
 #topcontrol {

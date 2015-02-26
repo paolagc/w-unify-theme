@@ -1,0 +1,48 @@
+.masonry {
+	padding-bottom: 60px;
+}
+
+.masonry .grid-boxes-in {
+	padding: 0;
+	margin-bottom: 30px;
+	border: solid 1px #eee;
+}
+
+.masonry .grid-boxes-caption {
+	padding: 15px;
+}
+
+.masonry h3 {
+	font-size: 20px; 
+	font-weight: 200;
+	line-height: 28px;
+}
+
+.masonry h3 a {
+	color: #555;
+}
+
+.masonry h3 a:hover {
+	color: #72c02c;
+}
+
+.masonry h3 a:hover {
+	color: #72c02c;
+}
+
+.masonry ul.grid-boxes-news {
+	margin-bottom: 15px;
+}
+
+.masonry ul.grid-boxes-news li {
+	font-size: 12px;
+}
+
+.masonry ul.grid-boxes-news li,
+.masonry ul.grid-boxes-news li a {
+	color: #777;
+}
+
+.masonry ul.grid-boxes-news li a:hover {
+	color: #72c02c;
+}

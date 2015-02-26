@@ -5,20 +5,12 @@
 	*/
 
  	get_header(); ?>
-
-			<?php $width = 12;
-				if( is_active_sidebar( 'left' ) ) $width -=3;
-			 ?>
-			<div class="row">
-					<?php if ( is_active_sidebar( 'sidebar' ) ) : ?>
-						<aside id="sidebar" class="widget-area" role="complementary">
-								<?php dynamic_sidebar( 'sidebar' ); ?>
-						</aside><!-- #left sidebar region -->
-					<?php endif; ?>	
-
-					<section id="main-content" class="col-md-<?php print $width; ?>" role="main">
+					<section id="main-content"  role="main">
 						<ul class="timeline">
-							<?php if ( have_posts() ) :
+							<?php 
+								$args = array( 'post_type' => 'post', 'cat' => '0','paged' =>  $paged );
+    							query_posts( $args );
+								if ( have_posts() ) :
 								$cont = 0;
 								while ( have_posts() ) : the_post(); 
 								$thumbnail = get_the_post_thumbnail( $post->ID, array(550 , 350) );
@@ -40,7 +32,7 @@
 												<a href="<?php the_permalink() ?>" class="pull-right button read-more btn-u btn-u-sm">Leer mas >></a>
 												<div class="timeline-footer">
 													<ul class="list-unstyled list-inline blog-info">
-														<li><i class="fa fa-clock-o"></i><?php the_date('Y-m-d', , ); ?></li>
+														<li><i class="fa fa-clock-o"></i><?php the_date('Y-m-d' ); ?></li>
 														<li><i class="fa fa-user"></i><?php the_author(); ?></li>
 													</ul>
 												</div>
@@ -52,5 +44,4 @@
 								endif; // end have_posts() check ?>
 						</ul>
 					</section>
-			</div>
 <?php get_footer(); ?>

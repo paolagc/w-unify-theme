@@ -109,3 +109,9 @@ var App = function () {
     };
 
 }();
+
+/**
+ * Base js functions
+ */
+
+ 
