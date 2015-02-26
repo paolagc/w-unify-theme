@@ -2,7 +2,7 @@
 
 
 <section id="main-content" role="main">
-<?php query_posts(array('post_type' => 'showcase','orderby' => 'date', 'posts_per_page' => '3'));
+<?php query_posts(array('post_type' => 'showcase','orderby' => 'date', 'order' => 'DESC', 'posts_per_page' => '3'));
  if(have_posts()) : while(have_posts()) : the_post();
 	$items[] = array(
 				'title' => get_the_title(),
@@ -16,11 +16,13 @@
 		endwhile; 
 	endif; 
 wp_reset_query();?>
+<?php if(count($items)): ?>
 	<div id="recent-works">
 		<div class="headline">
 			<h2>Recent Works</h2>
 		</div>
 		<div class="row zoom-rotate">
+
 			<?php foreach ($items as $item): ?>
 				<a href="<?php print $item['url'] ?>">
                         <em class="overflow-hidden">
@@ -32,9 +34,39 @@ wp_reset_query();?>
                         </span>
                     </a>
 			<?php endforeach; ?>
-		</div>	
-
+		</div>
 	</div>
+<?php endif; ?>
+	
+	<div id="recent-entries">
+		<div class="headline">
+			<h2>Recent Blogs Entries</h2>
+			<div class="row">
+				<?php query_posts(array('orderby' => 'date', 'order' => 'DESC','posts_per_page' => '4'));
+ 				if(have_posts()) : while(have_posts()) : the_post(); ?>
+ 					<div class="col-md-3 col-sm-6">
+		                <div class="thumbnails thumbnail-style thumbnail-kenburn">
+		                	<div class="thumbnail-img">
+		                        <div class="overflow-hidden">
+		                            <?php the_post_thumbnail( array(330, 210) );?>
+		                        </div>
+		                        <a class="btn-more hover-effect" href="<?php the_permalink() ?>">read more +</a>					
+		                    </div>
+		                    <div class="caption">
+		                        <h3><a class="hover-effect" href="<?php the_permalink() ?>"><?php the_title() ?></a></h3>
+		                        <?php the_excerpt() ?>
+		                    </div>
+		                </div>
+		            </div>
+ 				<?php 
+ 					endwhile;
+ 					endif;
+ 				?>
+			</div>
+			
+		</div>
+
+
 </section>
 
 <?php get_footer(); ?>
