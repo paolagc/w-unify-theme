@@ -222,13 +222,21 @@ function theme_base_widgets_init(){
 }
 add_action( 'widgets_init', 'theme_base_widgets_init' );
 
+function add_masonry() {
+	if(is_page_template('templates/page-masonry.php')) {
+
+	}
+}
+
 function add_isotope() {
-    wp_register_script( 'isotope', get_template_directory_uri().'/js/isotope.pkgd.min.js', array('jquery'),  true );
-    wp_register_script( 'isotope-init', get_template_directory_uri().'/js/isotope.js', array('jquery', 'isotope'),  true );
-    wp_register_style( 'isotope-css', get_stylesheet_directory_uri() . '/css/isotope.css' );
- 
-    wp_enqueue_script('isotope-init');
-    wp_enqueue_style('isotope-css');
+	if(is_page_template('templates/page-isotope.php')) {
+	    wp_register_script( 'isotope', get_template_directory_uri().'/js/isotope.pkgd.min.js', array('jquery'),  true );
+	    wp_register_script( 'isotope-init', get_template_directory_uri().'/js/isotope.js', array('jquery', 'isotope'),  true );
+	    wp_register_style( 'isotope-css', get_stylesheet_directory_uri() . '/css/isotope.css' );
+	 
+	    wp_enqueue_script('isotope-init');
+	    wp_enqueue_style('isotope-css');
+	}
 }
  
 add_action( 'wp_enqueue_scripts', 'add_isotope' );

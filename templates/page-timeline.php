@@ -17,7 +17,7 @@
 					<?php endif; ?>	
 
 					<section id="main-content" class="col-md-<?php print $width; ?>" role="main">
-						<ul class="timeline-v1">
+						<ul class="timeline">
 							<?php if ( have_posts() ) :
 								$cont = 0;
 								while ( have_posts() ) : the_post(); 
