@@ -4,7 +4,6 @@
 				if( is_active_sidebar( 'sidebar' ) ) $width -=3;
 			 ?>
 			<div class="row">
-					<?php get_sidebar(); ?>
 					<section id="main-content" class="col-md-<?php print $width; ?>" role="main">
 						<?php if ( have_posts() ) : ?>
 							<?php while ( have_posts() ) : the_post(); ?>
@@ -29,6 +28,7 @@
 							<?php endwhile; ?>
 						<?php endif; // end have_posts() check ?>
 					</section>
+					<?php get_sidebar(); ?>
 			</div>
 <?php get_footer(); ?>
 

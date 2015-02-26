@@ -178,8 +178,8 @@ function theme_base_widgets_init(){
 		'description'   => 'These are widgets for right sidebar.',
 		'before_widget' => '<div class="widget block %2$s">',
 		'after_widget'  => '</div>',
-		'before_title'  => '<h5',
-		'after_title'   => '</h5>'
+		'before_title'  => '<div class="headline headline-md"><h2>',
+		'after_title'   => '</h2></div>'
 	));	
 
 	/*
@@ -191,7 +191,7 @@ function theme_base_widgets_init(){
 			'description' => 'Widgets in the before content region.',
 			'before_widget' => '<div class="widget block %2$s">',
 			'after_widget'  => '</div>',
-			'before_title'  => '<h5',
+			'before_title'  => '<h5>',
 			'after_title'   => '</h5>'
 	));
 
@@ -204,7 +204,7 @@ function theme_base_widgets_init(){
 			'description' => 'Widgets in the after content region.',
 			'before_widget' => '<div class="widget block %2$s">',
 			'after_widget'  => '</div>',
-			'before_title'  => '<h5',
+			'before_title'  => '<h5>',
 			'after_title'   => '</h5>'
 	));
 
@@ -217,7 +217,7 @@ function theme_base_widgets_init(){
 			'description' => 'Widgets in the footer region.',
 			'before_widget' => '<div class="widget block %2$s">',
 			'after_widget'  => '</div>',
-			'before_title'  => '<h5',
+			'before_title'  => '<h5>',
 			'after_title'   => '</h5>'
 	));
 

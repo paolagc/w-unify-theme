@@ -8,7 +8,6 @@
 				if( is_active_sidebar( 'sidebar' ) ) $width -=3;
 			 ?>
 			<div class="row blog-page blog-item">
-					<?php get_sidebar(); ?>
 					<section id="main-content" class="col-md-<?php print $width ?>" role="main">
 						<?php
 							the_archive_title( '<h2 class="page-title">', '</h2>' );
@@ -35,5 +34,6 @@
 							<hr>
 						<?php endwhile; // end of the loop. ?>
 					</section>
+					<?php get_sidebar(); ?>
 			</div>
 <?php get_footer(); ?>

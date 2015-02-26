@@ -42,45 +42,43 @@
 									<?php wp_nav_menu( array( 'theme_location' => 'footer' , 'menu_class' => 'list-unstyled list-inline' )); ?>
 								</div>
 								<div class="col-md-6">
-									<?php if($has_social_links): ?>
 										<ul class="footer-socials list-inline">
-											<?php if($face_url): ?>
-												<li>
-													<a href="<?php print $face_url; ?>" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Facebook">
-					                                    <i class="fa fa-facebook"></i>
-					                                </a>
-				                                </li>
-											<?php endif; ?>
-											<?php if($twitter_url): ?>
-												<li>
-													<a href="<?php print $twitter_url; ?>" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Facebook">
-					                                    <i class="fa fa-twitter"></i>
-					                                </a>
-				                                </li>
-											<?php endif; ?>
-											<?php if($gplus_url): ?>
-												<li>
-													<a href="<?php print $gplus_url; ?>" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Facebook">
-					                                    <i class="fa fa-google-plus"></i>
-					                                </a>
-				                                </li>
-											<?php endif; ?>
-											<?php if($linkedin_url): ?>
-												<li>
-													<a href="<?php print $linkedin_url; ?>" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Facebook">
-					                                    <i class="fa fa-linkedin"></i>
-					                                </a>
-				                                </li>
-											<?php endif; ?>
-											<?php if($linkedin_url): ?>
-												<li>
-													<a href="<?php print $gplus_url; ?>" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Facebook">
-					                                    <i class="fa fa-linkedin"></i>
-					                                </a>
-				                                </li>
-											<?php endif; ?>
-										</ul>
-									<?php endif; ?>
+				                            <li>
+				                                <a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Facebook">
+				                                    <i class="fa fa-facebook"></i>
+				                                </a>
+				                            </li>
+				                            <li>
+				                                <a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Skype">
+				                                    <i class="fa fa-skype"></i>
+				                                </a>
+				                            </li>
+				                            <li>
+				                                <a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Google Plus">
+				                                    <i class="fa fa-google-plus"></i>
+				                                </a>
+				                            </li>
+				                            <li>
+				                                <a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Linkedin">
+				                                    <i class="fa fa-linkedin"></i>
+				                                </a>
+				                            </li>
+				                            <li>
+				                                <a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Pinterest">
+				                                    <i class="fa fa-pinterest"></i>
+				                                </a>
+				                            </li>
+				                            <li>
+				                                <a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Twitter">
+				                                    <i class="fa fa-twitter"></i>
+				                                </a>
+				                            </li>
+				                            <li>
+				                                <a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Dribbble">
+				                                    <i class="fa fa-dribbble"></i>
+				                                </a>
+				                            </li>
+				                        </ul>
 								</div>
 							</div>
 							
