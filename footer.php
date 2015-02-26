@@ -25,7 +25,7 @@
 </div><!-- end wrapper -->
 
 			<!-- Start footer -->
-				<footer class="footer navbar-fixed-bottom">
+				<footer class="footer">
 					<div class="footer-inner">
 						<div class="container">
 							<?php if ( is_active_sidebar( 'footer' ) ) : ?>

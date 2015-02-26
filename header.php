@@ -42,7 +42,7 @@
 							            <span class="icon-bar"></span>
 						            </button>
 
-								<?php wp_nav_menu( array(  'theme_location' => 'main'  , 'menu_class' => 'nav navbar-nav' , 'walker' => new My_Sub_Menu()) ); ?>
+								<?php wp_nav_menu( array(  'theme_location' => 'main'  , 'menu_class' => 'nav navbar-nav' , 'walker' => new wp_bootstrap_navwalker()) ); ?>
 							</nav>
 						</div><!-- #site-navigation -->
 	            </div>
@@ -85,6 +85,7 @@
 				 	$cont = 0;
 				 	foreach ($items as $item): ?>
 				 		<div class="item <?php if($cont === 0)  print active?>">
+				 		  <?php $img = wp_get_attachment_image_src();?>
 					      <img src="<?php print $item['image']?>" alt="<?php print $item['title']?>"   height="300">
 					      <div class="carousel-caption row-fluid"><h3 class="carousel-title">
 					      		<h3 class="carousel-title"><?php print $item['title']?></h3>

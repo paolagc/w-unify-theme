@@ -64,6 +64,8 @@ hr {
 }
 
 /*Headline*/
+
+
 /*Block Headline*/
 .headline {
   display: block;
@@ -988,11 +990,6 @@ h1 i, h2 i, h3 i, h4 i, h5 i, h6 i {
 }
 
 /*menus*/
-ul.nav li.menu-item-has-children:after{
-  top: 9px;
-  right: 15px;
-  content: "\f107";
-}
 
 /*Dropdown Menu*/
   .header .dropdown-menu { 
