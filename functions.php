@@ -71,6 +71,8 @@ function theme_base_setup(){
 	    add_image_size( 'full-blog', 850, 300, false ); // Full size screen
 	}
 }
+add_action( 'init', 'theme_base_setup' );
+
 /* Comments*/
 function format_comment($comment, $args, $depth) {
     
@@ -249,43 +251,6 @@ function setup_theme_admin_menus() {
 add_action('admin_menu', 'setup_theme_admin_menus');
 
 function social_settings(){
-	<form method="POST" action="" class="form-horizontal">
-		<div class="form-group">
-		    <label for="face-url" class="col-sm-2 control-label">Facebook URL</label>
-		    <div class="col-sm-10">
-		      <input type="url" class="form-control" id="face-url" placeholder="Facebook URL">
-		    </div>
-		 </div>
-
-		 <div class="form-group">
-		    <label for="twitter-url" class="col-sm-2 control-label">Twitter URL</label>
-		    <div class="col-sm-10">
-		      <input type="url" class="form-control" id="twitter-url" placeholder="Twitter URL">
-		    </div>
-		 </div>
-
-		 <div class="form-group">
-		    <label for="gplus-url" class="col-sm-2 control-label">Google Plus URL</label>
-		    <div class="col-sm-10">
-		      <input type="url" class="form-control" id="gplus-url" placeholder="Google Plus URL">
-		    </div>
-		 </div>
-
-		 <div class="form-group">
-		    <label for="linkedin-url" class="col-sm-2 control-label">Linkedin URL</label>
-		    <div class="col-sm-10">
-		      <input type="url" class="form-control" id="linkedin-url" placeholder="Linkedin URL">
-		    </div>
-		 </div>
-
-		 <div class="form-group">
-		    <label for="github-url" class="col-sm-2 control-label">Github URL</label>
-		    <div class="col-sm-10">
-		      <input type="url" class="form-control" id="github-url" placeholder="Github URL">
-		    </div>
-		 </div>
-
-	</form>
 	
 }
 

@@ -20,7 +20,7 @@
 		<!-- Start Topbar -->
 		<div class="topbar" role="menu"> 
 			<div class="container">
-				<?php wp_nav_menu( array( 'menu' => 'user' , 'menu_class' => 'loginbar pull-right', )); ?>
+				<?php wp_nav_menu( array( 'theme_location' => 'user' , 'menu_class' => 'loginbar pull-right', )); ?>
 			</div>
 		</div>
 		<!-- End Topbar -->
@@ -35,8 +35,14 @@
 
 	            		<div class="collapse navbar-collapse navbar-responsive-collapse">
 		            		<nav id="site-navigation" class="main-navigation" role="navigation">
-								<button class="menu-toggle" aria-controls="menu" aria-expanded="false"><span class="fa fa-bars"></span></button>
-								<?php wp_nav_menu( array( 'menu' => 'main' , 'menu_class' => 'nav navbar-nav') ); ?>
+								   <!-- Mobile toggle button -->
+						            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+							            <span class="icon-bar"></span>
+							            <span class="icon-bar"></span>
+							            <span class="icon-bar"></span>
+						            </button>
+
+								<?php wp_nav_menu( array(  'theme_location' => 'main'  , 'menu_class' => 'nav navbar-nav') ); ?>
 							</nav>
 						</div><!-- #site-navigation -->
 	            </div>

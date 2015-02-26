@@ -25,7 +25,7 @@
 </div><!-- end wrapper -->
 
 			<!-- Start footer -->
-				<footer class="footer">
+				<footer class="footer navbar-fixed-bottom">
 					<div class="footer-inner">
 						<div class="container">
 							<?php if ( is_active_sidebar( 'footer' ) ) : ?>
@@ -39,7 +39,7 @@
 						<div class="container">
 							<div class="row">
 								<div class="col-md-6">
-									<?php wp_nav_menu( array( 'menu' => 'footer' , 'menu_class' => 'list-unstyled list-inline' )); ?>
+									<?php wp_nav_menu( array( 'theme_location' => 'footer' , 'menu_class' => 'list-unstyled list-inline' )); ?>
 								</div>
 								<div class="col-md-6">
 									<?php if($has_social_links): ?>
