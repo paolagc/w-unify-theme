@@ -71,11 +71,23 @@ function theme_base_setup(){
 	if ( function_exists( 'add_theme_support' ) ) { 
 	    add_theme_support( 'post-thumbnails' );
 
-	    add_image_size( 'full-size', 9999, 9999, false ); // Full size screen
+	    add_image_size( 'full-size', 1999, 300, false ); // Full size screen
 	    add_image_size( 'full-blog', 850, 300, false ); // Full size screen
 	}
 }
 add_action( 'init', 'theme_base_setup' );
+
+class My_Sub_Menu extends Walker_Nav_Menu {
+  function start_lvl(&$output, $depth) {
+    $indent = str_repeat("\t", $depth);
+    $output .= "\n$indent<ul class=\"dropdown-menu\">\n";
+  }
+  function end_lvl(&$output, $depth) {
+    $indent = str_repeat("\t", $depth);
+    $output .= "$indent</ul>\n";
+  }
+}
+
 
 /* Comments*/
 function format_comment($comment, $args, $depth) {

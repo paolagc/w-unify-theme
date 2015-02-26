@@ -987,6 +987,57 @@ h1 i, h2 i, h3 i, h4 i, h5 i, h6 i {
   }
 }
 
+/*menus*/
+ul.nav li.menu-item-has-children:after{
+  top: 9px;
+  right: 15px;
+  content: "\f107";
+}
+
+/*Dropdown Menu*/
+  .header .dropdown-menu { 
+    padding: 0;
+    border: none;
+    min-width: 200px;
+    border-radius: 0; 
+    z-index: 9999 !important;
+    border-top: solid 2px #72c02c; 
+    border-bottom: solid 2px #687074; 
+    left: auto;
+  }
+
+  .header .dropdown-menu li a { 
+    color: #687074; 
+    font-size: 13px; 
+    font-weight: 400; 
+    padding: 6px 15px; 
+    border-bottom: solid 1px #eee;
+  }
+
+  .header .dropdown-menu .active > a,
+  .header .dropdown-menu li > a:hover {
+    color: #fff;
+    filter: none !important;
+    background: #687074 !important;
+    -webkit-transition: all 0.1s ease-in-out;
+    -moz-transition: all 0.1s ease-in-out;
+    -o-transition: all 0.1s ease-in-out;
+    transition: all 0.1s ease-in-out;
+  }
+
+  .header .dropdown-menu li > a:focus {
+    background: none;
+    filter: none !important;
+  }
+
+  .header .navbar-nav > li.dropdown:hover > .dropdown-menu {
+    display: block;
+  } 
+
+  .header .open > .dropdown-menu {
+    display: none;
+  }
+
 /*CSS3 Hover Effects*/
 .hover-effect {
    -webkit-transition: all 0.4s ease-in-out;
