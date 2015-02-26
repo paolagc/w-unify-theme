@@ -1119,6 +1119,23 @@ ul.nav li.menu-item-has-children:after{
    }
 }
 
+.zoom-rotate a:hover img {
+opacity: 0.8;
+-webkit-transform: scale(1.2) rotate(3deg);
+-moz-transform: scale(1.2) rotate(3deg);
+-o-transform: scale(1.0) rotate(3deg);
+-ms-transform: scale(1.2) rotate(3deg);
+transform: scale(1.2) rotate(3deg);
+}
+
+.zoom-rotate a img {
+-webkit-transition: all 0.8s ease-in-out;
+-moz-transition: all 0.8s ease-in-out;
+-o-transition: all 0.8s ease-in-out;
+-ms-transition: all 0.8s ease-in-out;
+transition: all 0.8s ease-in-out;
+}
+
 
 /*plugins*/
 #topcontrol {
