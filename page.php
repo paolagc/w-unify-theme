@@ -26,7 +26,7 @@
 										<?php endif; ?>                                              
 									</div>   
 									<?php if ( has_post_thumbnail() ) : ?>
-										<div class="blog-img">
+										<div class="blog-img pull-left">
 											<?php the_post_thumbnail('full-blog' , array('class' => 'img-bordered')); ?>
 										</div>
 									<?php endif; ?> 

@@ -1,4 +1,3 @@
-
 <?php
 	/*
 	Template Name: Blog Inverse
@@ -19,11 +18,11 @@
 											<div class="row">
 												<div class="col-md-6">
 													<?php 
-													if($cont % 2 == 0): ?>
+													if($cont % 2 === 0): ?>
 														<h3 class="archive-title"><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></h3>
 														<?php 
 															$content = get_the_content(); 
-															echo substr( $content, 0, 400);
+															print substr( $content, 0, 400);
 														?>
 													<?php else:
 														print $thumbnail;	
@@ -31,18 +30,19 @@
 												</div>
 												<div class="col-md-6">
 													<?php 
-													if($cont % 2 == 1):
-														print $thumbnail;
-													else: ?>
+													if($cont % 2 === 1):?>
 														<h3 class="archive-title"><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></h3>
 														<?php 
 															$content = get_the_content(); 
-															echo substr( $content, 0, 400);
+															print substr( $content, 0, 400);
 														?>
-													<?php endif ?>
+													<?php else:
+														print $thumbnail;	
+													endif; ?>
 												</div>
 											</div>
 									</div>
+									<hr>
 								<?php $cont++; ?>
 								<?php endwhile; 
 								endif; // end have_posts() check ?>

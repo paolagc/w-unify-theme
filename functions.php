@@ -77,7 +77,7 @@ function theme_base_setup(){
 
 	    add_image_size( 'full-size', 9999, 999, false ); // Full size screen
 	    add_image_size( 'slider-size', 1999, 300, false ); // Full size screen
-	    add_image_size( 'full-blog', 850, 300, false ); // Full size screen
+	    add_image_size( 'full-blog', 850, 200, false ); // Full size screen
 	}
 }
 add_action( 'init', 'theme_base_setup' );
