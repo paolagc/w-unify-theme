@@ -5,8 +5,6 @@
 */
 
 function theme_name_scripts() {
-	wp_enqueue_style( 'styles.css', get_stylesheet_uri() );
-
 	wp_enqueue_style( 'header', get_template_directory_uri() . '/css/header.css' );
 	wp_enqueue_style( 'footer', get_template_directory_uri() . '/css/footer.css' );
 	wp_enqueue_style( 'images', get_template_directory_uri() . '/css/images.css' );
@@ -17,7 +15,11 @@ function theme_name_scripts() {
 
 	//page templates
 	wp_enqueue_style( 'timeline', get_template_directory_uri() . '/css/timeline.css' );
-	wp_enqueue_style( 'masonry', get_template_directory_uri() . '/css/masonry.css' );
+	
+
+	//masonry
+	 wp_enqueue_script('masonry');
+    wp_enqueue_style('masonry', get_template_directory_uri().'/css/');
 
 	wp_enqueue_script( 'jquery' );
 	wp_enqueue_script( 'bootstrap.min', get_template_directory_uri() . '/js/bootstrap.min.js', array(), '1.0.0', true );
@@ -28,9 +30,11 @@ function theme_name_scripts() {
 	//plugins
 	wp_enqueue_script('jquery.fancybox.js', get_template_directory_uri() . '/js/jquery.fancybox.js', array( 'jquery' ), false, true);
 
+	wp_enqueue_style( 'styles.css', get_stylesheet_uri() );
 }
 
 add_action( 'wp_enqueue_scripts', 'theme_name_scripts' );
+
 
 //Initialize the meta boxes
 add_action( 'init', 'theme_base_initialize_cmb_meta_boxes', 9999 );   
@@ -77,6 +81,35 @@ function theme_base_setup(){
 	}
 }
 add_action( 'init', 'theme_base_setup' );
+
+
+//build taxonomy term list
+function theme_base_term_list_isotope($cat){
+	$args = array(
+	'orderby' => 'count',
+	'order' => 'DESC' ,
+    'hide_empty' => true
+    );
+
+	$terms = get_terms('category', $args);
+	$list = '';
+
+	if(count($terms)>0){
+		$list .= '<ul class="text-center list-inline list-unstyled" id="filters" data-option-key="filter">';
+		$list .= '<li class="filter active">All</li>';
+		foreach ( $terms as $term ) {
+		    // We successfully got a link. Print it out.
+		    $list .= '<li data-filter="'.$term->slug.'" class="filter">' . $term->name . '</li>';
+		}
+		$list .= '</ul>';
+	}
+	return $list;
+}
+
+function theme_base_masonry_init() {
+}
+//add to wp_footer
+add_action( 'wp_footer', 'theme_base_masonry_init' );
 
 //bootstrap walker
 
