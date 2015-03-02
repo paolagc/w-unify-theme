@@ -86,7 +86,7 @@
 				 	foreach ($items as $item): ?>
 				 		<div class="item <?php if($cont === 0)  print active?>">
 				 		  <?php $img = wp_get_attachment_image_src();?>
-					      <img src="<?php print $item['image']?>" alt="<?php print $item['title']?>"   height="300">
+					      <img src="<?php print $item['image']?>" alt="<?php print $item['title']?>" class="slider-full">
 					      <div class="carousel-caption row-fluid"><h3 class="carousel-title">
 					      		<h3 class="carousel-title"><?php print $item['title']?></h3>
 					        	<p><?php print $item['caption']?></p>

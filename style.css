@@ -1165,3 +1165,10 @@ transition: all 0.8s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
+
+
+/*slider*/
+.slider-class{
+  width: 1999;
+  height: 300px;
+}
