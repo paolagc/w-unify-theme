@@ -728,13 +728,6 @@ function showcase_create_metaboxes( $meta_boxes ) {
 			'id' =>  $prefix . 'date',
 			'type' => 'text_date'
 		  ),
-		  array(	//Add Image
-			'name' => 'Image',
-			  'desc' => 'Upload an image or enter an URL.',
-			  'id' => $prefix . 'image',
-			  'type' => 'file',
-			  'allow' => array( 'url', 'attachment' )
-		  ),
 		  array(	//Add URL link
 			'name' => 'Link',
 			  'desc' => 'Link to the project',

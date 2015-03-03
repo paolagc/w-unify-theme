@@ -24,15 +24,13 @@ wp_reset_query();?>
 		<div class="row zoom-rotate">
 
 			<?php foreach ($items as $item): ?>
-				<a href="<?php print $item['url'] ?>">
-                        <em class="overflow-hidden">
-                            <img class="img-responsive" src="<?php print $item['image'] ?>" alt="<?php print $item['title'] ?>">
-                        </em>    
-                        <span>
-                            <strong><?php print $item['title'] ?></strong>
-                            <i><?php print $item['caption'] ?></i>
-                        </span>
-                    </a>
+							<div class="col-md-4 col-sm-6">
+								<?php the_post_thumbnail('grid3'); ?>
+								<span class="badge top-left"><?php print $item['company'] ?></span>
+								
+									<h2 class="text-center"><?php print $item['title'] ?></h2>
+									<p><?php print $item['caption'] ?></p>
+							</div>
 			<?php endforeach; ?>
 		</div>
 	</div>

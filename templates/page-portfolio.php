@@ -20,12 +20,16 @@
 							                    <?php the_post_thumbnail('grid3' );?>
 							                    <div class="mask">
 							                        <?php the_title( '<h2>', '</h2>' ); ?>
-							                        <?php the_excerpt(); ?>
+							                        <?php 
+							                        	$content = get_the_excerpt();
+							                        	print substr($content, 0, 150);
+							                        ?>
+							                        <br>
 							                        <a href="<?php the_permalink() ?>" class="info">Read More</a>
 							                    </div>                
 							                </div>
 										</div>
-								<?php if($cont % 3 == 4): ?>	
+								<?php if($cont % 3 == 2): ?>	
 									</div>
 								<?php endif; ?>
 								<?php 

@@ -28,6 +28,10 @@
 		<div class="navbar navbar-default mega-menu" role="navigation">
 	            <div class="container">
 	            		<div class="navbar-header" role="button">
+	            			<!-- Mobile toggle button -->
+						           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+			                            <span class="fa fa-bars"></span>
+			                    	</button>
 		                    <div class="site-branding">
 								<h1 class="site-title"><a class="navbar-brand" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
 							</div><!-- .site-branding -->
@@ -35,12 +39,7 @@
 
 	            		<div class="collapse navbar-collapse navbar-responsive-collapse">
 		            		<nav id="site-navigation" class="main-navigation" role="navigation">
-								   <!-- Mobile toggle button -->
-						            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-							            <span class="icon-bar"></span>
-							            <span class="icon-bar"></span>
-							            <span class="icon-bar"></span>
-						            </button>
+								   
 
 								<?php wp_nav_menu( array(  'theme_location' => 'main'  , 'menu_class' => 'nav navbar-nav' , 'walker' => new wp_bootstrap_navwalker()) ); ?>
 							</nav>
