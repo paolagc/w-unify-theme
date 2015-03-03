@@ -15,11 +15,10 @@ function theme_name_scripts() {
 
 	//page templates
 	wp_enqueue_style( 'timeline', get_template_directory_uri() . '/css/timeline.css' );
-	
+	wp_enqueue_style( 'portfolio', get_template_directory_uri() . '/css/portfolio.css' );
 
 	//masonry
 	 wp_enqueue_script('masonry');
-    wp_enqueue_style('masonry', get_template_directory_uri().'/css/');
 
 	wp_enqueue_script( 'jquery' );
 	wp_enqueue_script( 'bootstrap.min', get_template_directory_uri() . '/js/bootstrap.min.js', array(), '1.0.0', true );
@@ -387,10 +386,10 @@ function theme_base_widgets_init(){
 	* Sidebar widgets
 	*/
 	register_sidebar(array(
-		'name' => 'idebar',
+		'name' => 'sidebar',
 		'id'   => 'sidebar',
 		'description'   => 'These are widgets for right sidebar.',
-		'before_widget' => '<div class="widget block %2$s">',
+		'before_widget' => '<div class="widget block margin-bottom-40 %2$s">',
 		'after_widget'  => '</div>',
 		'before_title'  => '<div class="headline headline-md"><h2>',
 		'after_title'   => '</h2></div>'
