@@ -1035,6 +1035,11 @@ h1 i, h2 i, h3 i, h4 i, h5 i, h6 i {
     display: none;
   }
 
+/* margins*/  
+.margin-bottom-40{
+  margin-bottom: 40px;
+}
+
 /*CSS3 Hover Effects*/
 .hover-effect {
    -webkit-transition: all 0.4s ease-in-out;
@@ -1095,7 +1100,7 @@ h1 i, h2 i, h3 i, h4 i, h5 i, h6 i {
    background-color: #000;
    background-position: 50%;
    background-repeat: no-repeat;
-   background-image:url("../img/overlay-icon.png");
+   background-image:url("img/overlay-icon.png");
    filter: alpha(opacity = 0);
    -webkit-backface-visibility: hidden;
    -webkit-transition: all 0.4s ease-in-out;
@@ -1164,4 +1169,10 @@ transition: all 0.8s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
+}
+
+/*slider*/
+.slider-img{
+  width: 1999px;
+  max-height: 430px;
 }

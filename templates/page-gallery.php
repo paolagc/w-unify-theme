@@ -18,7 +18,7 @@
 										<div class="col-md-3 col-sm-6">
 											<a class="thumbnail fancybox-button zoomer" data-rel="fancybox-button" title="<?php print the_title(); ?>" href="<?php print the_permalink(); ?>">
 						                        <span class="overlay-zoom">  
-						                            <?php the_post_thumbnail( array(260, 160) );?>
+						                            <?php the_post_thumbnail('grid4' );?>
 						                            <span class="zoom-icon"></span>
 						                        </span>                                              
 						                    </a>

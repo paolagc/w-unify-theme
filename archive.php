@@ -11,7 +11,7 @@
 					<section id="main-content" class="col-md-<?php print $width ?>" role="main">
 						<?php
 							the_archive_title( '<h2 class="page-title">', '</h2>' );
-							the_archive_description( '<div class="taxonomy-description">', '</div>' );
+							the_archive_description( '<div class="taxonomy-description margin-bottom-40">', '</div>' );
 						?>
 						<?php if ( have_posts() ) : ?>
 							<?php while ( have_posts() ) : the_post(); ?>

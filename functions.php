@@ -78,6 +78,11 @@ function theme_base_setup(){
 	    add_image_size( 'full-size', 9999, 999, false ); // Full size screen
 	    add_image_size( 'slider-size', 1999, 300, false ); // Full size screen
 	    add_image_size( 'full-blog', 850, 200, false ); // Full size screen
+
+	    add_image_size( 'grid3', 360,230, false ); 
+	    add_image_size( 'grid4', 260, 160, false );
+	    add_image_size( 'grid6', 165, 105, false );
+
 	}
 }
 add_action( 'init', 'theme_base_setup' );
@@ -328,7 +333,7 @@ function the_breadcrumb() {
 	if( is_category()){
 		$category = get_the_category($pid);
 		$cat_name = get_cat_name($category[0]->cat_ID);
-		$breadcrumb .= '<li>'.$cat_name.'</li>';
+		$breadcrumb .= '<li class="active">'.$cat_name.'</li>';
 	}
 
 
@@ -343,7 +348,7 @@ function the_breadcrumb() {
 		$breadcrumb .= '<li><a href="'.$cat_link.'">'.$cat_name.'</a></li>';
 
     	//post title
-    	$breadcrumb .= '<li>'.$post->post_title.'</li>';
+    	$breadcrumb .= '<li  class="active">'.$post->post_title.'</li>';
 	}
 
 	// Single page
@@ -355,18 +360,18 @@ function the_breadcrumb() {
 			$breadcrumb .= '<a href="'.get_permalink($pdata->ID).'">'.$pdata->post_title.'</a>';
 		}
 		//page title
-    	$breadcrumb .= '<li>'.$pdata->post_title.'</li>';
+    	$breadcrumb .= '<li  class="active">'.$pdata->post_title.'</li>';
 	}
 
 	// Tag page
 	if( is_tag() ){
 		//page title
-    	$breadcrumb .= '<li>'.single_tag_title().'</li>';
+    	$breadcrumb .= '<li  class="active">'.single_tag_title().'</li>';
 	}
 
 	// Search page
 	if( is_tag() ){
-    	$breadcrumb .= '<li>Search Results</li>';
+    	$breadcrumb .= '<li  class="active">Search Results</li>';
 	}
 
 	$breadcrumb .= '</ul>';
@@ -593,7 +598,7 @@ function slider_create_metaboxes( $meta_boxes ) {
 		'fields' => array(
 		array(
 		'name' => 'Instructions',
-		'desc' => "<ol><li>Enter your title above.</li><li>In the right column upload a featured image (Make sure this image is at least <b>1200x400px</b>).</li><li>Then if you'd like to add a few words about your feature do so below. (I would suggest no more than 100 words!).</li><li>Finaly position the body text; Then publish the slide.</li></ol>",
+		'desc' => "<ol><li>Enter your title above.</li><li>In the right column upload a featured image (Make sure this image is at least <b>1200x400px</b>).</li><li>Then if you'd like to add a few words about your feature do so below. (I would suggest no more than 100 words!).</li></ol>",
 		'type' => 'title',
 	  ),
 	  array(	//Add a text area
@@ -697,7 +702,7 @@ function showcase_create_metaboxes( $meta_boxes ) {
 		'fields' => array(
 			array(
 			'name' => 'Instructions',
-			'desc' => "<ol><li>Enter your title above.</li><li>In the right column upload a featured image (Make sure this image is at least <b>400px,300px</b>).</li><li>Then if you'd like to add a few words about your feature do so below. (I would suggest no more than 100 words!).</li><li>Finaly position the body text; Then publish the slide.</li></ol>",
+			'desc' => "<ol><li>Enter your title above.</li><li>In the right column upload a featured image (Make sure this image is at least <b>400px,300px</b>).</li><li>Then if you'd like to add a few words about your feature do so below. (I would suggest no more than 100 words!).</li><li></li></ol>",
 			'type' => 'title',
 		  ),
 		  array(
@@ -742,6 +747,107 @@ function showcase_create_metaboxes( $meta_boxes ) {
 	);
 	return $meta_boxes;
 }
+
+//user team
+function member_init() {
+    $labels = array(
+        'name' => _x('Team members', 'post type general name'),
+        'singular_name' => _x('member', 'post type singular name'),
+        'add_new' => _x('Add New', 'member'), //This is our post_type, we'll display the metaboxes only on this post_type!
+        'add_new_item' => __('Add New member'),
+        'edit_item' => __('Edit member'),
+        'new_item' => __('New member'),
+        'view_item' => __('View member'),
+        'search_items' => __('Search members'),
+        'not_found' => __('No members found'),
+        'not_found_in_trash' => __('No members found in Trash'),
+        'parent_item_colon' => '',
+        'menu_name' => 'Team members'
+    );
+    $args = array(
+        'labels' => $labels,
+        'public' => true,
+        'publicly_queryable' => true,
+        'show_ui' => true,
+        'show_in_menu' => true,
+        'menu_position' => 5,
+        'query_var' => true,
+        'rewrite' => true,
+        'capability_type' => 'post',
+        'has_archive' => true,
+        'hierarchical' => false,
+        'supports' => array('title', 'thumbnail')
+    );
+    register_post_type('team_member', $args);
+}
+add_action( 'init', 'member_init' );
+
+//add custom fields
+add_filter( 'cmb_meta_boxes' , 'member_create_metaboxes' );
+function member_create_metaboxes( $meta_boxes ) {
+	$prefix = 'member_';
+	  $meta_boxes[] = array(
+		'id' => $prefix.'_contents',
+		'title' => 'Team Members',
+		'desc' => 'Enter the member name',
+		'pages' => array('team_member'),//Add our post_type() we created earlier.
+		'context' => 'normal',
+		'priority' => 'low',
+		'show_names' => true,
+		'fields' => array(
+		array(
+		'name' => 'Instructions',
+		'desc' => "<ol><li>Enter your name above.</li><li>Brief description.</li><li>Then add to your social network profiles</li></ol>",
+		'type' => 'title',
+	  ),
+	  array(	//Add a text area
+		'name' => 'Description',
+		'desc' => 'Enter a few words about the member',
+		'id' =>  $prefix . 'caption',
+		'type' => 'textarea_small'
+	  ),
+	  array(	//Add Image
+		'name' => 'Image',
+		  'desc' => 'Upload a photo or enter an URL.',
+		  'id' => $prefix . 'image',
+		  'type' => 'file',
+		  'allow' => array( 'url', 'attachment' )
+	  ),
+	  array(	
+		'name' => 'Linkedin',
+		  'id' => $prefix . 'linkedin',
+		  'type' => 'text_url',
+		  'protocols' => array( 'http', 'https'),
+	  ),
+	  array(	
+		'name' => 'Google plus',
+		  'id' => $prefix . 'gplus',
+		  'type' => 'text_url',
+		  'protocols' => array( 'http', 'https'),
+	  ),
+	  array(	
+		'name' => 'Twitter',
+		  'id' => $prefix . 'twitter',
+		  'type' => 'text_url',
+		  'protocols' => array( 'http', 'https'),
+	  ),
+	  array(	
+		'name' => 'Github',
+		  'id' => $prefix . 'github',
+		  'type' => 'text_url',
+		  'protocols' => array( 'http', 'https'),
+	  ),
+	  array(	
+		'name' => 'Facebook',
+		  'id' => $prefix . 'facebook',
+		  'type' => 'text_url',
+		  'protocols' => array( 'http', 'https'),
+	  ),
+	),
+	);
+	return $meta_boxes;
+}
+
 
 function theme_base_format_link($urls) {
     $urls = explode(',', $urls);
