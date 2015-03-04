@@ -4,6 +4,8 @@
  * @subpackage Unify Base Theme
 */
 
+require_once(TEMPLATEPATH . '/admin/admin-options.php');
+
 function theme_name_scripts() {
 	wp_enqueue_style( 'header', get_template_directory_uri() . '/css/header.css' );
 	wp_enqueue_style( 'footer', get_template_directory_uri() . '/css/footer.css' );
@@ -460,16 +462,36 @@ function add_isotope() {
  
 add_action( 'wp_enqueue_scripts', 'add_isotope' );
 
-function setup_theme_admin_menus() {
-     add_submenu_page('themes.php', 
-        'Social Networks', 'Social Networks Configuration', 'manage_options', 
-        'social-networks-config', 'social_settings'); 
-}
-add_action('admin_menu', 'setup_theme_admin_menus');
 
-function social_settings(){
-	
+function theme_base_theme_customizer( $wp_customize ) {
+
+	//color section
+    $wp_customize->add_section( 'color_section', array(
+        'title' => 'Color Scheme', 
+    ) );
+	 
+	$wp_customize->add_setting( 'general_color', array(
+	    'default' => '#ccc',
+	    'type' => '',
+	) );
+ 
+	$wp_customize->add_setting( 'link_color', array(
+	    'default' => '#0783B9',
+	    'type' => '',
+	) );
+
+	//single page
+	$wp_customize->add_section( 'single_page', array(
+        'title' => 'Single Page',
+    ) );
+
+    //Contact page
+	$wp_customize->add_section( 'contact_page', array(
+        'title' => 'Contact Page',
+    ) );
+
 }
+add_action( 'customize_register', 'theme_base_theme_customizer' );
 
 // Custom user fields
 add_action( 'edit_user_profile', 'extra_profile_fields' );
@@ -796,18 +818,16 @@ function member_create_metaboxes( $meta_boxes ) {
 		'desc' => "<ol><li>Enter your name above.</li><li>Brief description.</li><li>Then add to your social network profiles</li></ol>",
 		'type' => 'title',
 	  ),
+	array(	//Add a text area
+		'name' => 'Job Position',
+		'id' =>  $prefix . 'position',
+		'type' => 'text'
+	  ),
 	  array(	//Add a text area
 		'name' => 'Description',
 		'desc' => 'Enter a few words about the member',
 		'id' =>  $prefix . 'caption',
 		'type' => 'textarea_small'
-	  ),
-	  array(	//Add Image
-		'name' => 'Image',
-		  'desc' => 'Upload a photo or enter an URL.',
-		  'id' => $prefix . 'image',
-		  'type' => 'file',
-		  'allow' => array( 'url', 'attachment' )
 	  ),
 	  array(	
 		'name' => 'Linkedin',

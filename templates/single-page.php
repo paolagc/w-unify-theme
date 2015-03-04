@@ -1,3 +1,8 @@
+<?php
+	/*
+	Template Name: Single page
+	*/
+?>
 <!DOCTYPE html>
 <!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
 <!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
@@ -37,7 +42,7 @@
 							$slug = $page->post_name;
 
 						?>
-						<li <?php if($cont == 0) print class="active" ?> >a href="#<?php print $slug?>"><?php print $title ?></a></li>
+						<li <?php if($cont == 0) print 'class="active"' ?> ><a href="#<?php print $slug?>"><?php print $title ?></a></li>
 						<?php 
 							$cont++;
 							endforeach;
