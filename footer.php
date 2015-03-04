@@ -42,7 +42,7 @@
 									<?php wp_nav_menu( array( 'theme_location' => 'footer' , 'menu_class' => 'list-unstyled list-inline' )); ?>
 								</div>
 								<div class="col-md-6">
-										<ul class="footer-socials list-inline">
+										<ul class="footer-socials list-inline pull-right">
 				                            <li>
 				                                <a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Facebook">
 				                                    <i class="fa fa-facebook"></i>

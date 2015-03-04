@@ -1,4 +1,4 @@
-/*Footer-v1
+/*Footer
 ------------------------------------*/
 .footer .footer-inner {
 	padding: 40px 0;	
@@ -47,19 +47,10 @@
 	margin: 0 2px;
 }
 
-.footer .footer-inner-socials {
-	margin-top: 12px;
-	text-align: right;
+.footer #menu-footer li{
+	border-right: solid 1px #fff;
 }
 
-.footer .footer-inner-socials li a {
-	color: #777;
-	font-size: 16px;
-}
-
-@media (max-width: 991px) {
-	.footer .copyright,
-	.footer .footer-inner-socials {
-		text-align: left;
-	}
+.footer #menu-footer li:last-child{
+	border-right: none;
 }
