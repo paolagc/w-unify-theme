@@ -3,8 +3,7 @@
  * @package WordPress
  * @subpackage Unify Base Theme
 */
-
-require_once(TEMPLATEPATH . '/admin/admin-options.php');
+require_once ('admin/admin-options.php');
 
 function theme_name_scripts() {
 	wp_enqueue_style( 'header', get_template_directory_uri() . '/css/header.css' );
@@ -82,7 +81,7 @@ function theme_base_setup(){
 
 	    add_image_size( 'full-size', 9999, 999, false ); // Full size screen
 	    add_image_size( 'slider-size', 1999, 300, false ); // Full size screen
-	    add_image_size( 'full-blog', 850, 200, false ); // Full size screen
+	    add_image_size( 'full-blog', 850, 300, false ); // Full size screen
 
 	    add_image_size( 'grid3', 360,230, false ); 
 	    add_image_size( 'grid4', 260, 160, false );
@@ -441,27 +440,6 @@ function theme_base_widgets_init(){
 	));
 
 }
-add_action( 'widgets_init', 'theme_base_widgets_init' );
-
-function add_masonry() {
-	if(is_page_template('templates/page-masonry.php')) {
-
-	}
-}
-
-function add_isotope() {
-	if(is_page_template('templates/page-isotope.php')) {
-	    wp_register_script( 'isotope', get_template_directory_uri().'/js/isotope.pkgd.min.js', array('jquery'),  true );
-	    wp_register_script( 'isotope-init', get_template_directory_uri().'/js/isotope.js', array('jquery', 'isotope'),  true );
-	    wp_register_style( 'isotope-css', get_stylesheet_directory_uri() . '/css/isotope.css' );
-	 
-	    wp_enqueue_script('isotope-init');
-	    wp_enqueue_style('isotope-css');
-	}
-}
- 
-add_action( 'wp_enqueue_scripts', 'add_isotope' );
-
 
 function theme_base_theme_customizer( $wp_customize ) {
 
