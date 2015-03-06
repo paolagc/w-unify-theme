@@ -38,8 +38,9 @@ function theme_name_scripts() {
 	wp_enqueue_script( 'back-to-top', get_template_directory_uri() . '/js/back-to-top.js',array(), '1.0.0', true );
 
 	if( is_page_template('templates/page-gallery.php')){
-   		wp_enqueue_script('fancybox', get_template_directory_uri() . '/js/jquery.fancybox.js', array( 'jquery' ), false, true);
-		wp_enqueue_script( 'lightbox', get_template_directory_uri() . '/js/lightbox.js', array( 'fancybox' ), false, true );
+   		wp_enqueue_script('fancybox', get_template_directory_uri() . '/js/jquery.fancybox.js', array( 'jquery' ));
+		wp_enqueue_script( 'lightbox', get_template_directory_uri() . '/js/ligthbox.js', array( 'fancybox' ));
+		wp_enqueue_style( 'fancybox.css', get_template_directory_uri() . '/css/fancybox.css' );
 	}
 
 	wp_enqueue_style( 'styles.css', get_stylesheet_uri() );
