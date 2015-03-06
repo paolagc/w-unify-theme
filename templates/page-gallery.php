@@ -16,10 +16,11 @@
 									<div class="row">
 								<?php endif; ?>
 										<div class="col-md-3 col-sm-6">
-											<a class="thumbnail fancybox-button zoomer" data-rel="fancybox-button" title="<?php print the_title(); ?>" href="<?php print the_permalink(); ?>">
+											<?php  $image_url = wp_get_attachment_image_src( get_post_thumbnail_id(), 'large');?>
+											<a class="thumbnail fancybox-button zoomer" title="<?php the_title(); ?>" data-rel="fancybox-button" href="<?php print $image_url[0] ?>">
 						                        <span class="overlay-zoom">  
-						                            <?php the_post_thumbnail('grid4' );?>
-						                            <span class="zoom-icon"></span>
+ 													<img src="<?php print $image_url[0] ?>" width="260" height="230" >
+ 													<span class="zoom-icon"></span>
 						                        </span>                                              
 						                    </a>
 										</div>
@@ -31,5 +32,3 @@
 								endwhile;
 								endif; ?>
 						</div>
-					</section>
-<?php get_footer(); ?>

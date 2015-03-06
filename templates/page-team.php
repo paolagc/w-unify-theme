@@ -20,10 +20,10 @@
 			if ( have_posts() ) :
 			while ( have_posts() ) : the_post(); ?>
 
-			<?php if($cont % 3 == 0): ?>
+			<?php if($cont % 4 == 0): ?>
 				<div class="row">
 			<?php endif; ?>
-				<div class="col-lg-4 col-md-6 col-sm-12">
+				<div class="col-lg-3 col-md-4 col-sm-6">
 	                <div class="thumbnail-style">
 	                    <?php the_post_thumbnail('grid3');?>
 	                    <h3><?php the_title(); ?>
@@ -38,7 +38,7 @@
 	                </div>
 	            </div>
 					
-			<?php if($cont % 3 == 2): ?>
+			<?php if($cont % 4 == 3): ?>
 				</div>
 			<?php endif; ?>
 

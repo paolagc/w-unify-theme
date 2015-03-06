@@ -32,13 +32,15 @@ function theme_name_scripts() {
 		wp_enqueue_style( 'horizontal', get_template_directory_uri() . '/css/single-horizontal.css' );
 	}
 
-	wp_enqueue_script( 'bootstrap.min', get_template_directory_uri() . '/js/bootstrap.min.js', array(), '1.0.0', true );
-	wp_enqueue_script( 'app', get_template_directory_uri() . '/js/app.js');
+	wp_enqueue_script( 'bootstrap.min', get_template_directory_uri() . '/js/bootstrap.min.js', array('jquery'), '1.0.0', true );
+	wp_enqueue_script( 'app', get_template_directory_uri() . '/js/app.js',array('jquery'));
 	wp_enqueue_script( 'navigation', get_template_directory_uri() . '/js/navigation.js');
 	wp_enqueue_script( 'back-to-top', get_template_directory_uri() . '/js/back-to-top.js',array(), '1.0.0', true );
 
-	//plugins
-	wp_enqueue_script('jquery.fancybox.js', get_template_directory_uri() . '/js/jquery.fancybox.js', array( 'jquery' ), false, true);
+	if( is_page_template('templates/page-gallery.php')){
+   		wp_enqueue_script('fancybox', get_template_directory_uri() . '/js/jquery.fancybox.js', array( 'jquery' ), false, true);
+		wp_enqueue_script( 'lightbox', get_template_directory_uri() . '/js/lightbox.js', array( 'fancybox' ), false, true );
+	}
 
 	wp_enqueue_style( 'styles.css', get_stylesheet_uri() );
 }
@@ -83,19 +85,24 @@ function theme_base_setup(){
 
 
 	if ( function_exists( 'add_theme_support' ) ) { 
-	    add_theme_support( 'post-thumbnails' );
+	    add_theme_support( 'post-thumbnails' ,array('post', 'page'));
+	}
 
-	    add_image_size( 'full-size', 9999, 999, false ); // Full size screen
-	    add_image_size( 'slider-size', 1999, 300, false ); // Full size screen
-	    add_image_size( 'full-blog', 850, 300, false ); // Full size screen
 
-	    add_image_size( 'grid3', 360,230, false ); 
-	    add_image_size( 'grid4', 260, 160, false );
-	    add_image_size( 'grid6', 165, 105, false );
+	if ( function_exists( 'add_image_size' ) ) { 
+	    add_image_size( 'full-size', 9999, 999, true ); // Full size screen
+	    add_image_size( 'slider-size', 1999, 300, true ); // Full size screen
+	    add_image_size( 'full-blog', 850, 300, true ); // Full size screen
+
+	    add_image_size( 'grid4', 260,230, false ); 
 
 	}
 }
 add_action( 'init', 'theme_base_setup' );
+
+if (function_exists('set_post_thumbnail_size'));
+ set_post_thumbnail_size( $options[$shortname . '_normal_thumbnail_size_x'], $options[$shortname . '_normal_thumbnail_size_y'], true);
+
 
 
 //build taxonomy term list
