@@ -21,9 +21,9 @@
 	<?php wp_head(); ?> 
 </head>
 <body <?php body_class(); ?>>
-	<header class="header" role="banner">
+	<header class="header navbar navbar-default navbar-fixed-top" role="banner">
 		<!-- Start Topbar -->
-		<div class="navbar navbar-default mega-menu" role="navigation">
+		<div role="navigation">
 	            <div class="container-full">
 	            	<div class="row">
 	            		<div class="col-sm-2">
@@ -47,7 +47,7 @@
 	            		<div class="col-sm-5">
 	            			<div class="collapse navbar-collapse navbar-responsive-collapse">
 			            		<nav role="navigation">
-									<?php wp_nav_menu( array(  'theme_location' => 'user'  , 'menu_class' => 'loginbar pull-right') ); ?>
+									<?php wp_nav_menu( array(  'theme_location' => 'user'  , 'menu_class' => 'loginbar pull-right list-inline list-unstyled') ); ?>
 								</nav>
 							</div><!-- user-navigation -->
 	            		</div>
@@ -65,38 +65,41 @@
 	 				if(have_posts()) : ?>
 	 				<div class="aside-fixed">
 	 					<div id="horizontal-slider" class="carousel slide">
-		 					<div class="carousel-inner">
-		 						<?php while(have_posts()) : the_post(); ?>
-			 						<div class="item">
+	 						<!-- Wrapper for slides -->
+		 					<div class="carousel-inner" role="listbox">
+		 						<?php $cont = 0;
+		 							while(have_posts()) : the_post();  ?>
+			 						<div class="item <?php if($cont === 0)  print active?>">
 			 							<img src="<?php print get_post_meta($post->ID, 'slider_image', true); ?>">
 			 							<span class="title"><?php the_title(); ?></span>
 			 							<p><?php print get_post_meta($post->ID, 'slider_caption', true)?></p>
 			 							<a class="btn" href="<?php print get_post_meta($post->ID, 'slider_url', true)?>"><?php __('Read More')?></a>
 			 						</div>
-				 				<?php endwhile; ?>
+				 				<?php 
+				 					$cont++;
+				 					endwhile;
+				 				 ?>
 		 					</div>
-		 					<div class="bottom-menu">
-			 					<div class="controls pull-left">
-			 						<span class="toggle-fullpage">
-			 							<i class="fa fa-expand fa-3"></i>
-			 						</span>
-			 						<a class="left carousel-control" href="#horizontal-slider" role="button" data-slide="prev">
-									    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-									    <span class="sr-only">Previous</span>
-									 </a>
-
-									 <a class="right carousel-control" href="#horizontal-slider" role="button" data-slide="next">
-									    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-									    <span class="sr-only">Previous</span>
-									 </a>
-			 					</div>
-			 					<span class="pull-right">
-			 							<i class="fa fa-bars fa-3"></i>
-			 					</span>
-			 				</div>
+		 					 <!-- Controls -->
+		 					<a class="left carousel-control" href="#horizontal-slider" role="button" data-slide="prev">
+								<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+								<span class="sr-only">Previous</span>
+							</a>
+			 				<a class="right carousel-control" href="#horizontal-slider" role="button" data-slide="next">
+								<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+								<span class="sr-only">Previous</span>
+							</a>
 		 				</div>
 						<?php endif; ?>
 					<?php wp_reset_query();?>
+	 				</div>
+	 				<div class="bottom-menu">
+	 				 	<span class="toggle-fullpage pull-left">
+	 						<i class="fa fa-expand fa-3"></i>
+	 					</span>
+	 					<span class="pull-right">
+	 					 	<i class="fa fa-bars fa-3"></i>
+	 					</span>
 	 				</div>
 			</div>
 			<!-- End Main Slider -->

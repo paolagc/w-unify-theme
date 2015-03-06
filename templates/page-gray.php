@@ -8,10 +8,11 @@
 						<div class="container content grid-boxes masonry">
 							<div class="page-descrition margin-bottom-40">
 								<?php while ( have_posts() ) : the_post() ;
-									the_content(); 
-								endwhile ;?>
+									the_content(); ?>
+									<hr>
+								<?php endwhile ;?>
 							</div>
-							<hr>
+							
 							<?php 
 								$args = array( 'post_type' => 'post', 'cat' => '0','paged' =>  $paged );
     							query_posts( $args );
@@ -27,6 +28,7 @@
 												<li><i class="fa fa-user"></i><?php the_author(); ?></li>
 											</ul>
 											<?php the_excerpt() ?>
+											<hr>
 								</div>
 								<?php endwhile;
 							endif; ?>

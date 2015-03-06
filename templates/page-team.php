@@ -23,7 +23,7 @@
 			<?php if($cont % 3 == 0): ?>
 				<div class="row">
 			<?php endif; ?>
-				<div class="col-sm-4">
+				<div class="col-lg-4 col-md-6 col-sm-12">
 	                <div class="thumbnail-style">
 	                    <?php the_post_thumbnail('grid3');?>
 	                    <h3><?php the_title(); ?>
