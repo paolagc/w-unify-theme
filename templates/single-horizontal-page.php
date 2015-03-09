@@ -1,6 +1,6 @@
 <?php
 	/*
-	Template Name: Vertical horizontal page
+	Template Name: Single horizontal page
 	*/
 ?>
 <!DOCTYPE html>
@@ -64,7 +64,18 @@
 				<?php query_posts(array('post_type' => 'slider','order' => 'DESC'));
 	 				if(have_posts()) : ?>
 	 				<div class="aside-fixed">
-	 					<div id="horizontal-slider" class="carousel slide">
+	 					<div id="horizontal-slider" class="carousel slide" data-ride="carousel">
+	 						<!-- Indicators -->
+  							<ol class="carousel-indicators">
+  								<?php $cont = 0;
+		 							while(have_posts()) : the_post();  ?>
+		 							<li data-target="#horizontal-slider" data-slide-to="<?php print $cont; ?>"  <?php if($cont === 0) print 'class="active"'?> ></li>
+  								<?php 
+				 					$cont++;
+				 					endwhile;
+				 				 ?>
+  							</ol>
+
 	 						<!-- Wrapper for slides -->
 		 					<div class="carousel-inner" role="listbox">
 		 						<?php $cont = 0;
@@ -72,7 +83,7 @@
 			 						<div class="item <?php if($cont === 0)  print active?>">
 			 							<img src="<?php print get_post_meta($post->ID, 'slider_image', true); ?>">
 			 							<span class="title"><?php the_title(); ?></span>
-			 							<p><?php print get_post_meta($post->ID, 'slider_caption', true)?></p>
+			 							<p class="caption"><?php print get_post_meta($post->ID, 'slider_caption', true)?></p>
 			 							<a class="btn" href="<?php print get_post_meta($post->ID, 'slider_url', true)?>"><?php __('Read More')?></a>
 			 						</div>
 				 				<?php 
@@ -87,7 +98,7 @@
 							</a>
 			 				<a class="right carousel-control" href="#horizontal-slider" role="button" data-slide="next">
 								<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-								<span class="sr-only">Previous</span>
+								<span class="sr-only">Next</span>
 							</a>
 		 				</div>
 						<?php endif; ?>
