@@ -1,3 +1,8 @@
+<?php
+	/*
+	Template Name: Vertical Single page
+	*/
+?>
 <!DOCTYPE html>
 <!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
 <!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
@@ -23,7 +28,7 @@
 				<nav class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
 						<?php 
-							// define how pages will display
+						// define how pages will display
 						$args = array(
 							'sort_order' => 'ASC',
 							'sort_column' => 'menu_order', //post_title
@@ -37,7 +42,7 @@
 							$slug = $page->post_name;
 
 						?>
-						<li <?php if($cont == 0) print class="active" ?> >a href="#<?php print $slug?>"><?php print $title ?></a></li>
+						<li <?php if($cont == 0) print 'class="active"' ?> ><a href="#<?php print $slug?>"><?php print $title ?></a></li>
 						<?php 
 							$cont++;
 							endforeach;
@@ -52,6 +57,14 @@
 		<div id="content">
 			<div class="container page-scroll">
 				<?php
+					// define how pages will display
+					$args = array(
+							'sort_order' => 'ASC',
+							'sort_column' => 'menu_order', //post_title
+							'post_type' => 'page',
+							'post_status' => 'publish'
+					);
+					$pages = get_pages($args);
 					foreach ($pages as $page):
 						$content = apply_filters('the_content', $page->post_content);
 					    $title = $page->post_title;

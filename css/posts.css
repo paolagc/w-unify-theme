@@ -1,3 +1,30 @@
+blockquote {
+	border: none;
+	padding: 18px;
+	font-size: 16px;
+	background: #f3f3f3;
+	border-left: solid 2px #666;
+}
+
+/*Common Style*/
+.box-shadow {
+	background: #fff;
+	position: relative;
+}
+
+.box-shadow:after,
+.box-shadow:before {
+	top: 80%;
+	left: 5px;
+	width: 50%;
+	z-index: -1;
+	content: "";
+	bottom: 15px;
+	max-width: 300px;
+	background: #999;
+	position: absolute;	
+}
+
 /*Blog Page*/
 .blog h2 {
 	color: #555;

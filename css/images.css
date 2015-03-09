@@ -107,3 +107,8 @@ a.thumbnail {
    transform: scale(1.2) rotate(2deg);
 }
 
+img.full-blog{
+   height: 300px;
+   width: 800px;
+}
+

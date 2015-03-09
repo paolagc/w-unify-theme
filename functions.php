@@ -3,6 +3,7 @@
  * @package WordPress
  * @subpackage Unify Base Theme
 */
+require_once ('admin/admin-options.php');
 
 function theme_name_scripts() {
 	wp_enqueue_style( 'header', get_template_directory_uri() . '/css/header.css' );
@@ -15,20 +16,32 @@ function theme_name_scripts() {
 
 	//page templates
 	wp_enqueue_style( 'timeline', get_template_directory_uri() . '/css/timeline.css' );
-	
+	wp_enqueue_style( 'portfolio', get_template_directory_uri() . '/css/portfolio.css' );
+
+	//load basic jquery
+	wp_enqueue_script( 'jquery' );
 
 	//masonry
-	 wp_enqueue_script('masonry');
-    wp_enqueue_style('masonry', get_template_directory_uri().'/css/');
+	if( is_page_template('templates/page-masonry.php')){
+		wp_enqueue_script('masonry');
+		wp_enqueue_script( 'custom.masonry', get_template_directory_uri() . '/js/custom.masonry.js','masonry','1.0.0', true );
+	}
 
-	wp_enqueue_script( 'jquery' );
-	wp_enqueue_script( 'bootstrap.min', get_template_directory_uri() . '/js/bootstrap.min.js', array(), '1.0.0', true );
-	wp_enqueue_script( 'app', get_template_directory_uri() . '/js/apps.js');
+	// horizontal single page
+	if( is_page_template('templates/single-horizontal-page.php')){
+		wp_enqueue_style( 'horizontal', get_template_directory_uri() . '/css/single-horizontal.css' );
+	}
+
+	wp_enqueue_script( 'bootstrap.min', get_template_directory_uri() . '/js/bootstrap.min.js', array('jquery'), '1.0.0', true );
+	wp_enqueue_script( 'app', get_template_directory_uri() . '/js/app.js',array('jquery'));
 	wp_enqueue_script( 'navigation', get_template_directory_uri() . '/js/navigation.js');
-	wp_enqueue_script( 'back-to-top', get_template_directory_uri() . '/js/back-to-top.js');
+	wp_enqueue_script( 'back-to-top', get_template_directory_uri() . '/js/back-to-top.js',array(), '1.0.0', true );
 
-	//plugins
-	wp_enqueue_script('jquery.fancybox.js', get_template_directory_uri() . '/js/jquery.fancybox.js', array( 'jquery' ), false, true);
+	if( is_page_template('templates/page-gallery.php')){
+   		wp_enqueue_script('fancybox', get_template_directory_uri() . '/js/jquery.fancybox.js', array( 'jquery' ));
+		wp_enqueue_script( 'lightbox', get_template_directory_uri() . '/js/ligthbox.js', array( 'fancybox' ));
+		wp_enqueue_style( 'fancybox.css', get_template_directory_uri() . '/css/fancybox.css' );
+	}
 
 	wp_enqueue_style( 'styles.css', get_stylesheet_uri() );
 }
@@ -73,14 +86,24 @@ function theme_base_setup(){
 
 
 	if ( function_exists( 'add_theme_support' ) ) { 
-	    add_theme_support( 'post-thumbnails' );
+	    add_theme_support( 'post-thumbnails' ,array('post', 'page'));
+	}
 
-	    add_image_size( 'full-size', 9999, 999, false ); // Full size screen
-	    add_image_size( 'slider-size', 1999, 300, false ); // Full size screen
-	    add_image_size( 'full-blog', 850, 200, false ); // Full size screen
+
+	if ( function_exists( 'add_image_size' ) ) { 
+	    add_image_size( 'full-size', 9999, 999, true ); // Full size screen
+	    add_image_size( 'slider-size', 1999, 300, true ); // Full size screen
+	    add_image_size( 'full-blog', 850, 300, true ); // Full size screen
+
+	    add_image_size( 'grid4', 260,230, false ); 
+
 	}
 }
 add_action( 'init', 'theme_base_setup' );
+
+if (function_exists('set_post_thumbnail_size'));
+ set_post_thumbnail_size( $options[$shortname . '_normal_thumbnail_size_x'], $options[$shortname . '_normal_thumbnail_size_y'], true);
+
 
 
 //build taxonomy term list
@@ -328,7 +351,7 @@ function the_breadcrumb() {
 	if( is_category()){
 		$category = get_the_category($pid);
 		$cat_name = get_cat_name($category[0]->cat_ID);
-		$breadcrumb .= '<li>'.$cat_name.'</li>';
+		$breadcrumb .= '<li class="active">'.$cat_name.'</li>';
 	}
 
 
@@ -343,7 +366,7 @@ function the_breadcrumb() {
 		$breadcrumb .= '<li><a href="'.$cat_link.'">'.$cat_name.'</a></li>';
 
     	//post title
-    	$breadcrumb .= '<li>'.$post->post_title.'</li>';
+    	$breadcrumb .= '<li  class="active">'.$post->post_title.'</li>';
 	}
 
 	// Single page
@@ -355,18 +378,18 @@ function the_breadcrumb() {
 			$breadcrumb .= '<a href="'.get_permalink($pdata->ID).'">'.$pdata->post_title.'</a>';
 		}
 		//page title
-    	$breadcrumb .= '<li>'.$pdata->post_title.'</li>';
+    	$breadcrumb .= '<li  class="active">'.$pdata->post_title.'</li>';
 	}
 
 	// Tag page
 	if( is_tag() ){
 		//page title
-    	$breadcrumb .= '<li>'.single_tag_title().'</li>';
+    	$breadcrumb .= '<li  class="active">'.single_tag_title().'</li>';
 	}
 
 	// Search page
 	if( is_tag() ){
-    	$breadcrumb .= '<li>Search Results</li>';
+    	$breadcrumb .= '<li  class="active">Search Results</li>';
 	}
 
 	$breadcrumb .= '</ul>';
@@ -382,10 +405,10 @@ function theme_base_widgets_init(){
 	* Sidebar widgets
 	*/
 	register_sidebar(array(
-		'name' => 'idebar',
+		'name' => 'sidebar',
 		'id'   => 'sidebar',
 		'description'   => 'These are widgets for right sidebar.',
-		'before_widget' => '<div class="widget block %2$s">',
+		'before_widget' => '<div class="widget block margin-bottom-40 %2$s">',
 		'after_widget'  => '</div>',
 		'before_title'  => '<div class="headline headline-md"><h2>',
 		'after_title'   => '</h2></div>'
@@ -431,37 +454,36 @@ function theme_base_widgets_init(){
 	));
 
 }
-add_action( 'widgets_init', 'theme_base_widgets_init' );
 
-function add_masonry() {
-	if(is_page_template('templates/page-masonry.php')) {
+function theme_base_theme_customizer( $wp_customize ) {
 
-	}
-}
-
-function add_isotope() {
-	if(is_page_template('templates/page-isotope.php')) {
-	    wp_register_script( 'isotope', get_template_directory_uri().'/js/isotope.pkgd.min.js', array('jquery'),  true );
-	    wp_register_script( 'isotope-init', get_template_directory_uri().'/js/isotope.js', array('jquery', 'isotope'),  true );
-	    wp_register_style( 'isotope-css', get_stylesheet_directory_uri() . '/css/isotope.css' );
+	//color section
+    $wp_customize->add_section( 'color_section', array(
+        'title' => 'Color Scheme', 
+    ) );
 	 
-	    wp_enqueue_script('isotope-init');
-	    wp_enqueue_style('isotope-css');
-	}
-}
+	$wp_customize->add_setting( 'general_color', array(
+	    'default' => '#ccc',
+	    'type' => '',
+	) );
  
-add_action( 'wp_enqueue_scripts', 'add_isotope' );
+	$wp_customize->add_setting( 'link_color', array(
+	    'default' => '#0783B9',
+	    'type' => '',
+	) );
 
-function setup_theme_admin_menus() {
-     add_submenu_page('themes.php', 
-        'Social Networks', 'Social Networks Configuration', 'manage_options', 
-        'social-networks-config', 'social_settings'); 
-}
-add_action('admin_menu', 'setup_theme_admin_menus');
+	//single page
+	$wp_customize->add_section( 'single_page', array(
+        'title' => 'Single Page',
+    ) );
 
-function social_settings(){
-	
+    //Contact page
+	$wp_customize->add_section( 'contact_page', array(
+        'title' => 'Contact Page',
+    ) );
+
 }
+add_action( 'customize_register', 'theme_base_theme_customizer' );
 
 // Custom user fields
 add_action( 'edit_user_profile', 'extra_profile_fields' );
@@ -593,7 +615,7 @@ function slider_create_metaboxes( $meta_boxes ) {
 		'fields' => array(
 		array(
 		'name' => 'Instructions',
-		'desc' => "<ol><li>Enter your title above.</li><li>In the right column upload a featured image (Make sure this image is at least <b>1200x400px</b>).</li><li>Then if you'd like to add a few words about your feature do so below. (I would suggest no more than 100 words!).</li><li>Finaly position the body text; Then publish the slide.</li></ol>",
+		'desc' => "<ol><li>Enter your title above.</li><li>In the right column upload a featured image (Make sure this image is at least <b>1200x400px</b>).</li><li>Then if you'd like to add a few words about your feature do so below. (I would suggest no more than 100 words!).</li></ol>",
 		'type' => 'title',
 	  ),
 	  array(	//Add a text area
@@ -697,7 +719,7 @@ function showcase_create_metaboxes( $meta_boxes ) {
 		'fields' => array(
 			array(
 			'name' => 'Instructions',
-			'desc' => "<ol><li>Enter your title above.</li><li>In the right column upload a featured image (Make sure this image is at least <b>400px,300px</b>).</li><li>Then if you'd like to add a few words about your feature do so below. (I would suggest no more than 100 words!).</li><li>Finaly position the body text; Then publish the slide.</li></ol>",
+			'desc' => "<ol><li>Enter your title above.</li><li>In the right column upload a featured image (Make sure this image is at least <b>400px,300px</b>).</li><li>Then if you'd like to add a few words about your feature do so below. (I would suggest no more than 100 words!).</li><li></li></ol>",
 			'type' => 'title',
 		  ),
 		  array(
@@ -724,13 +746,6 @@ function showcase_create_metaboxes( $meta_boxes ) {
 			'id' =>  $prefix . 'date',
 			'type' => 'text_date'
 		  ),
-		  array(	//Add Image
-			'name' => 'Image',
-			  'desc' => 'Upload an image or enter an URL.',
-			  'id' => $prefix . 'image',
-			  'type' => 'file',
-			  'allow' => array( 'url', 'attachment' )
-		  ),
 		  array(	//Add URL link
 			'name' => 'Link',
 			  'desc' => 'Link to the project',
@@ -742,6 +757,105 @@ function showcase_create_metaboxes( $meta_boxes ) {
 	);
 	return $meta_boxes;
 }
+
+//user team
+function member_init() {
+    $labels = array(
+        'name' => _x('Team members', 'post type general name'),
+        'singular_name' => _x('member', 'post type singular name'),
+        'add_new' => _x('Add New', 'member'), //This is our post_type, we'll display the metaboxes only on this post_type!
+        'add_new_item' => __('Add New member'),
+        'edit_item' => __('Edit member'),
+        'new_item' => __('New member'),
+        'view_item' => __('View member'),
+        'search_items' => __('Search members'),
+        'not_found' => __('No members found'),
+        'not_found_in_trash' => __('No members found in Trash'),
+        'parent_item_colon' => '',
+        'menu_name' => 'Team members'
+    );
+    $args = array(
+        'labels' => $labels,
+        'public' => true,
+        'publicly_queryable' => true,
+        'show_ui' => true,
+        'show_in_menu' => true,
+        'menu_position' => 5,
+        'query_var' => true,
+        'rewrite' => true,
+        'capability_type' => 'post',
+        'has_archive' => true,
+        'hierarchical' => false,
+        'supports' => array('title', 'thumbnail')
+    );
+    register_post_type('team_member', $args);
+}
+add_action( 'init', 'member_init' );
+
+//add custom fields
+add_filter( 'cmb_meta_boxes' , 'member_create_metaboxes' );
+function member_create_metaboxes( $meta_boxes ) {
+	$prefix = 'member_';
+	  $meta_boxes[] = array(
+		'id' => $prefix.'_contents',
+		'title' => 'Team Members',
+		'desc' => 'Enter the member name',
+		'pages' => array('team_member'),//Add our post_type() we created earlier.
+		'context' => 'normal',
+		'priority' => 'low',
+		'show_names' => true,
+		'fields' => array(
+		array(
+		'name' => 'Instructions',
+		'desc' => "<ol><li>Enter your name above.</li><li>Brief description.</li><li>Then add to your social network profiles</li></ol>",
+		'type' => 'title',
+	  ),
+	array(	//Add a text area
+		'name' => 'Job Position',
+		'id' =>  $prefix . 'position',
+		'type' => 'text'
+	  ),
+	  array(	//Add a text area
+		'name' => 'Description',
+		'desc' => 'Enter a few words about the member',
+		'id' =>  $prefix . 'caption',
+		'type' => 'textarea_small'
+	  ),
+	  array(	
+		'name' => 'Linkedin',
+		  'id' => $prefix . 'linkedin',
+		  'type' => 'text_url',
+		  'protocols' => array( 'http', 'https'),
+	  ),
+	  array(	
+		'name' => 'Google plus',
+		  'id' => $prefix . 'gplus',
+		  'type' => 'text_url',
+		  'protocols' => array( 'http', 'https'),
+	  ),
+	  array(	
+		'name' => 'Twitter',
+		  'id' => $prefix . 'twitter',
+		  'type' => 'text_url',
+		  'protocols' => array( 'http', 'https'),
+	  ),
+	  array(	
+		'name' => 'Github',
+		  'id' => $prefix . 'github',
+		  'type' => 'text_url',
+		  'protocols' => array( 'http', 'https'),
+	  ),
+	  array(	
+		'name' => 'Facebook',
+		  'id' => $prefix . 'facebook',
+		  'type' => 'text_url',
+		  'protocols' => array( 'http', 'https'),
+	  ),
+	),
+	);
+	return $meta_boxes;
+}
+
 
 function theme_base_format_link($urls) {
     $urls = explode(',', $urls);

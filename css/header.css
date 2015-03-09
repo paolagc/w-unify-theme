@@ -913,7 +913,7 @@
 	overflow: hidden;
 	padding: 10px 0 6px;
 	border-bottom: solid 1px #eee;
-	background: url(../img/breadcrumbs.png) repeat;
+	background: url("../img/breadcrumbs.png") repeat;
 }
 .breadcrumbs h1 {
 	color: #666;
@@ -923,8 +923,8 @@
 
 .breadcrumb { 
 	top: 10px;
-	padding-right: 0;
-	background: none;
+	padding-right: 0; 
+	background: transparent !important;
 	position: relative;
 }
 .breadcrumb a {

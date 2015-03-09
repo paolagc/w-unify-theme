@@ -1,0 +1,23 @@
+header{
+	height: 70px;
+}
+
+.aside-fixed{
+	position: fixed;
+	top: 70px;
+	left: 0;
+	width: inherit;
+	z-index: 1;
+}
+
+.bottom-menu{
+	position: fixed;
+	bottom: 0;
+	z-index: 100;
+	width: inherit;
+}
+
+.bottom-menu span{
+	padding: 5px;
+	background-color: rgba(0,0,0,0.6);
+}
